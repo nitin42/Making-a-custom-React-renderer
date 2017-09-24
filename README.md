@@ -2,5 +2,5 @@
 > Let's make a custom React renderer
 
 <p align="center">
-  <img src="https://www.techmagic.co/images/technology/react.png" width="750" height="380">
+  <img src="https://cdn.filestackcontent.com/5KdzhvGRG61WMQhBa1Ql" width="630" height="350">
 </p>
