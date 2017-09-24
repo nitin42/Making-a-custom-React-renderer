@@ -1,6 +1,6 @@
 # Part-III
 
-In the [last section](./part-two.md) we created a `createElement` method and also designed the component API for our example. In this part, we will
+In the [last section](./part-two.md), we created a `createElement` method and also designed the component API for our example. In this part, we will
 create a function for parsing the input component (input to the `render` method) and return the output.
 
 ## Parse
@@ -61,7 +61,6 @@ appendInitialChild(parentInstance, child) {
 
 **`document.render()`**
 
-Here we are calling the render method of the input component. This will append all the children to `children` array. Thus we will use
-this data (child nodes) to flush to the host environment.
+Here we are calling the render method of the input component. This will append all the children to `children` array. Thus, we can flush this output to the host environment.
 
-Finally we return our input component and use `toBuffer method to return the output`.
+Finally we return our input component and use `toBuffer` method to return the output.
