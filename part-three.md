@@ -64,3 +64,7 @@ appendInitialChild(parentInstance, child) {
 Here we are calling the render method of the input component. This will append all the children to `children` array. Thus, we can flush this output to the host environment.
 
 Finally we return our input component and use `toBuffer` method to return the output.
+
+Yeah! We're done with this part and now we just need a `render` method to flush everything to the host environment we need.
+
+[Continue to Part-IV](./part-four.md)
