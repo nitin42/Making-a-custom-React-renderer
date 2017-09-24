@@ -200,3 +200,7 @@ export default createElement;
 I think you can easily understand what's happening inside the function. `createElement` takes a type of element, props, and the root instance.
 
 Depending upon the type of element, we return an instance based on it else we return `undefined` (JavaScript's love 😅).
+
+We're done with the part two of our tutorial. We created the API for our two components (`Document` and `Text`) and a `createElement` method to create an element. Now we will create a function that will parse the input component (input to `render` method) and will return the output (rendered children and props).
+
+[Continue to Part-III](./part-three.md)
