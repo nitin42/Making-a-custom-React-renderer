@@ -157,9 +157,7 @@ This method creates a component instance with `type`, `props`, `rootContainerIns
 Example - Let's say we render,
 
 ```js
-<Document>
-  <Text>Hello World</Text>
-</Document>
+<Text>Hello World</Text>
 ```  
 
 `createInstance` will then return the information about the `type` of element (' TEXT '), props ( { children: 'Hello World' } ), rootContainerInstance(`WordDocument`),
