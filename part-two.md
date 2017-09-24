@@ -1,6 +1,6 @@
 # Part-II
 
-So in the last section we built a React reconciler and saw how it manages the lifecycle of our renderer.
+So in the [last section](./part-one.md) we built a React reconciler and saw how it manages the lifecycle of our renderer.
 
 In part two, we'll create a public interface to the reconciler. We will design our component API and will also build a custom version
 of `createElement` method.
