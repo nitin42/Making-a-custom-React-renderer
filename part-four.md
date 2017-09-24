@@ -1,7 +1,7 @@
 # Part-IV
 
 This is the last section of our tutorial. We've done all the heavy work, created a React reconciler, created a public interface to
-our reconciler, we designed the component API and also created a function to parse the input component.
+our reconciler, designed the component API and also created a function to parse the input component.
 
 Now we just need to create a `render` method to flush everything to the host environment.
 
@@ -54,11 +54,18 @@ Let's see what's going on here!
 
 This is the root instance (remember `rootContainerInstance` in our reconciler ?).
 
-**`WordRenderer.createContainer(container)`**
+**`WordRenderer.createContainer`**
 
 This function takes a `root` containers and returns the current fiber (flushed fiber). Remember a fiber is a JavaScript object
 that contains information about a component, it's input and output.
 
-**`WordRenderer.updateContainer(element, node, null)`**
+**`WordRenderer.updateContainer`**
 
-[WIP]
+This function takes an element, a root container, a parent component, a callback function and schedules a top level update.
+This is done by scheduling an update with the current fiber and a priority level (depends on the context)
+
+Finally we parse our input component to render all the children and props and generate the word document by creating a write stream.
+
+Congrats! You've have successfully completed the tutorial.
+
+[Work in Progress]
