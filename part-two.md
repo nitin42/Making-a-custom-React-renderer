@@ -81,7 +81,7 @@ Let's see what's going on here!
 
 **`constructor()`**
 
-In our `constructor`, we initialise the `root` and `props`. We also create a reference to our `doc` instance which we created earlier in `WordDocument.js`. This reference is then 
+In our `constructor`, we initialise the `root` instance and `props`. We also create a reference to our `doc` instance which we created earlier in `WordDocument.js`. This reference is then 
 use to create paragraph by adding text nodes to it.
 
 Example - 
