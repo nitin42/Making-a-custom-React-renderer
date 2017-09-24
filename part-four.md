@@ -1,0 +1,64 @@
+# Part-IV
+
+This is the last section of our tutorial. We've done all the heavy work, created a React reconciler, created a public interface to
+our reconciler, we designed the component API and also created a function to parse the input component.
+
+Now we just need to create a `render` method to flush everything to the host environment.
+
+## render
+
+```js
+
+import fs from 'fs';
+import createElement from '../utils/createElement';
+import { WordRenderer } from './renderer';
+import parse from './parse';
+
+// renders the component
+async function render(element, filePath) {
+  const container = createElement('ROOT');
+
+  const node = WordRenderer.createContainer(container);
+
+  WordRenderer.updateContainer(element, node, null);
+
+  const output = parse(container).toBuffer();
+  
+  const stream = fs.createWriteStream(filePath);
+
+  await new Promise((resolve, reject) => {
+    output.doc.generate(stream, Events(filePath, resolve, reject));
+  });
+}
+
+function Events(filePath, resolve, reject) {
+  return {
+    finalize: () => {
+      console.log(`✨  Word document created at ${path.resolve(filePath)}.`);
+      resolve();
+    },
+    error: () => {
+      console.log('An error occurred while generating the document.');
+      reject();
+    },
+  };
+}
+
+export default render;
+
+```
+
+Let's see what's going on here!
+
+**`container`**
+
+This is the root instance (remember `rootContainerInstance` in our reconciler ?).
+
+**`WordRenderer.createContainer(container)`**
+
+This function takes a `root` containers and returns the current fiber (flushed fiber). Remember a fiber is a JavaScript object
+that contains information about a component, it's input and output.
+
+**`WordRenderer.updateContainer(element, node, null)`**
+
+[WIP]
