@@ -218,3 +218,7 @@ is required to make correct calls for example to create an element in html or in
 **`getPublicInstance`**
 
 This is an identity relation which means that it always returns the same value that was used as its argument. It was added for TestRenderers.
+
+We're done with the part one of our tutorial. I know some concepts are difficult to grok solely by looking at code. Initially it feels agitating but keep trying it and it will eventually make sense. When I first started learning about the Fiber architecture, I couldn't understand anything at all. I was frustated and dismayed but I used `console.log()` 😆😆 in every section of the above code to understand what was going on and then there was this "Aha Aha" moment and it finally helped me to build [redocx]().
+
+If you still have any doubts, please DM me. I'm at @NTulswani on Twitter.
