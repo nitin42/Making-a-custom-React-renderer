@@ -1,6 +1,6 @@
 # Part-III
 
-In the last section we created a `createElement` method and also designed the component API for our example. In this part, we will
+In the [last section](./part-two.md) we created a `createElement` method and also designed the component API for our example. In this part, we will
 create a function for parsing the input component (input to the `render` method) and return the output.
 
 ## Parse
