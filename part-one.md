@@ -165,7 +165,7 @@ Example - Let's say we render,
 `createInstance` will then return the information about the `type` of element (' TEXT '), props ( { children: 'Hello World' } ), rootContainerInstance(`WordDocument`),
 hostContext (`{}`) and internalInstanceHandle. 
 
-`internalInstanceHandle` contains information about the `tag`, `type`, `'key'`, `stateNode`, and the return fiber. This object (fiber) further contains information about -
+`internalInstanceHandle` contains information about the `tag`, `type`, `key`, `stateNode`, and the return fiber. This object (fiber) further contains information about -
 
 * `tag`
 * `key`
@@ -200,7 +200,7 @@ Example -
 
 ```js
 const data = document.render(); // returns the output
-``
+```
 
 **`prepareUpdate`**
 
