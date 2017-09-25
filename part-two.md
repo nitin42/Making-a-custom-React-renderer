@@ -183,7 +183,6 @@ import { Document, Text, WordDocument } from '../components/index';
  */
 function createElement(type, props, root) {
 
-  // Hash table lookup is much better than evaluating each case with switch-case
   const COMPONENTS = {
     ROOT: () => new WordDocument(),
     TEXT: () => new Text(root, props),
