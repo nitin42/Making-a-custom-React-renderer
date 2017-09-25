@@ -1,0 +1,26 @@
+{
+  "name": "Making-a-custom-React-renderer",
+  "version": "1.0.0",
+  "description": "Tutorial on how to build a custom React renderer",
+  "main": "index.js",
+  "repository": "https://github.com/nitin42/Making-a-custom-React-renderer.git",
+  "author": "Nitin <tulswani19@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "fbjs": "0.8.4",
+    "officegen": "^0.4.5",
+    "react": "6.0.0-alpha.4",
+    "react-dom": "16.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production ./node_modules/.bin/babel src -d build",
+    "example": "./node_modules/.bin/babel-node ./demo/App.js"
+  }
+}
