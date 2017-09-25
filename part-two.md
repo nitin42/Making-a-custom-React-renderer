@@ -5,7 +5,7 @@ So in the [last section](./part-one.md) we built a React reconciler and saw how 
 In part two, we'll create a public interface to the reconciler. We will design our component API and will also build a custom version
 of `createElement` method.
 
-## Component API
+## Components
 
 For our example we just need to implement two components, `Document` and `Text`. A `Document` component is a wrapper or say parent
 component (like `div`) and `Text` component is the main component for adding the text to our document.
