@@ -41,7 +41,7 @@ In part four, we will create a render method which will render our input compone
 
 ## What we will build?
 
-We will create a custom renderer that will render a React component to a word document. I've already made one. Full source code and the documentation is available [here](https://github.com/nitin42/redocx).
+We will create a custom renderer that will render a React component to a word document. I've already made one. Full source code and the documentation for that is available [here](https://github.com/nitin42/redocx).
 
 We will use [officegen](https://github.com/Ziv-Barber/officegen) for this. I'll explain some of it's basic concepts here.
 
@@ -83,4 +83,4 @@ After you run `npm run example`, a docx file will be generated in the [demo](./d
 
 Suggestions to improve the tutorial are welcome 😃.
 
-**If you've completed the tutorial successfully, you can either watch/star this repo or follow me on twitter for more updates.**
+**If you've completed the tutorial successfully, you can either watch/star this repo or follow me on [twitter](https://twitter.com/NTulswani) for more updates.**
