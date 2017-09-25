@@ -160,7 +160,7 @@ Example - Let's say we render,
 <Text>Hello World</Text>
 ```  
 
-`createInstance` will then return the information about the `type` of element (' TEXT '), props ( { children: 'Hello World' } ), rootContainerInstance(`WordDocument`),
+`createInstance` will then return the information about the `type` of an element (' TEXT '), props ( { children: 'Hello World' } ), rootContainerInstance(`WordDocument`),
 hostContext (`{}`) and internalInstanceHandle. 
 
 `internalInstanceHandle` contains information about the `tag`, `type`, `key`, `stateNode`, and the return fiber. This object (fiber) further contains information about -
