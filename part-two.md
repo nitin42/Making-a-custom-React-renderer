@@ -45,12 +45,12 @@ class Document {
     this.adder = this.root.doc.createP();
   }
   
-  // Add all children
+  // Add children
   appendChild(child) {
     this.children.push(child);
   }
   
-  // Remove all children
+  // Remove children
   removeChild(child) {
     const index = this.children.indexOf(child);
     this.children.slice(index, 1);
