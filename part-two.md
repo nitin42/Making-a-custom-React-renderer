@@ -196,7 +196,7 @@ function createElement(type, props, root) {
 export default createElement;
 ```
 
-I think you can easily understand what's happening inside the function. `createElement` takes a type of element, props, and the root instance.
+I think you can easily understand what's happening inside the `createElement` method. It takes an element, props, and the root instance.
 
 Depending upon the type of element, we return an instance based on it else we return `undefined`.
 
