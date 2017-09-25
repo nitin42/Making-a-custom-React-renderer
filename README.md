@@ -1,7 +1,5 @@
 # Building a custom React renderer
 
-[WIP] come back when its done
-
 > Let's make a custom React renderer 😎
 
 <p align="center">
@@ -73,14 +71,18 @@ doc.generate(output);
 ```
 git clone https://github.com/nitin42/Making-a-custom-React-renderer
 cd Making-a-custom-React-renderer
-npm install
-npm run example
+yarn install
+yarn example
 ```
 
-After you run `npm run example`, a docx file will be generated in the [demo](./demo) folder.
+After you run `yarn example`, a docx file will be generated in the [demo](./demo) folder.
 
 ## Contributing
 
 Suggestions to improve the tutorial are welcome 😃.
 
 **If you've completed the tutorial successfully, you can either watch/star this repo or follow me on [twitter](https://twitter.com/NTulswani) for more updates.**
+
+<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/FCRW65HPiwhNtebDx2tTc53E/nitin42/Making-a-custom-React-renderer'>
+  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/FCRW65HPiwhNtebDx2tTc53E/nitin42/Making-a-custom-React-renderer.svg' />
+</a>
