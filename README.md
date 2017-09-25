@@ -39,7 +39,42 @@ In part three, we will build a function that will parse the input component and 
 In part four, we will create a render method which will render our input component.
 
 
-## Example
+## What we will build?
 
 We will create a custom renderer that will render a React component to a word document. I've already made one for the community. Full source code and the documentation is available [here](https://github.com/nitin42/redocx).
+
+We will use [officegen]() for this. The official documentation for officegen is not so transparent so I'll explain some of it's basic concepts here.
+
+Officegen can generate Open Office XML files for Microsoft Office 2007 and later. It generates a output stream and not a file.
+It is independent of any output tool.
+
+**Creating a document object**
+
+```js
+let doc = officegen('docx', { __someOptions__ });
+```
+
+**Generating output stream**
+
+```js
+let output = fs.createWriteStream (__filePath__);
+
+doc.generate(output);
+```
+
+**Events**
+
+`finalize` - It is fired after a stream has been generated successfully.
+
+`error` - Fired when there are any errors
+
+## Running the project
+
+```
+git clone https://github.com/nitin42/Making-a-custom-React-renderer
+cd Making-a-custom-React-renderer
+npm install
+npm run example
+```
+
 
