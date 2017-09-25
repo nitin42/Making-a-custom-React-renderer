@@ -43,7 +43,7 @@ In part four, we will create a render method which will render our input compone
 
 We will create a custom renderer that will render a React component to a word document. I've already made one for the community. Full source code and the documentation is available [here](https://github.com/nitin42/redocx).
 
-We will use [officegen]() for this. The official documentation for officegen is not so transparent so I'll explain some of it's basic concepts here.
+We will use [officegen](https://github.com/Ziv-Barber/officegen) for this. I'll explain some of it's basic concepts here.
 
 Officegen can generate Open Office XML files for Microsoft Office 2007 and later. It generates a output stream and not a file.
 It is independent of any output tool.
