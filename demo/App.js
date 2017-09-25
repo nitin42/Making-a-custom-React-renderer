@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Document, Text, render } from '../build';
+import { Document, Text, render } from '../src';
 
 class App extends Component {
   render () {
