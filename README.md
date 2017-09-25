@@ -77,4 +77,10 @@ npm install
 npm run example
 ```
 
+After you run `npm run example`, a docx file will be generated in the [demo](./demo) folder.
 
+## Contributing
+
+Suggestions to improve the tutorial are welcome 😃.
+
+**If you've completed the tutorial successfully, you can either watch/star this repo or follow me on twitter for more updates.**
