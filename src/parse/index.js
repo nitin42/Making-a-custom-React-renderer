@@ -8,7 +8,7 @@ const parse = (input) => {
     return inputComponent;
   }
 
-  async function toBuffer() {
+  function toBuffer() {
     return parseComponent(input);
   }
 
