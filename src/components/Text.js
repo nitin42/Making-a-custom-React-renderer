@@ -17,16 +17,16 @@ class Text {
     this.children.slice(index, 1);
   }
 
-  async renderChildren() {
+  renderChildren() {
     for (let i = 0; i < this.children.length; i += 1) {
       if (typeof this.children[i] === 'string') {
-        await this.adder.addText(this.children[i]);
+        this.adder.addText(this.children[i]);
       } // else { some_custom_method(); } here it's upto you how do you handle the nested components. For our example, we won't go into much details.
     }
   }
 
-  async render() {
-    await this.renderChildren();
+  render() {
+    this.renderChildren();
   }
 }
 
