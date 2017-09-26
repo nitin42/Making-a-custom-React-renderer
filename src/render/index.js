@@ -16,7 +16,7 @@ async function render(element, filePath) {
   WordRenderer.updateContainer(element, node, null);
 
   // Parse the input component and return the output
-  const output = await parse(container).toBuffer();
+  const output = parse(container).toBuffer();
 
   // Officegen generates a output stream and not a file
   const stream = fs.createWriteStream(filePath);
