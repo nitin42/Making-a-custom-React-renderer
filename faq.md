@@ -47,3 +47,6 @@ all the children and props.
 Well, it totally depends on you to structure the component API. But some things will remain unchanged if you create your own, `appendChild`
 and `removeChild`.
 
+#### I need some help on my renderer!?
+
+Sure! Always happy to help you 😄. My Twitter handle is [@NTulswani](https://twitter.com/NTulswani)!
