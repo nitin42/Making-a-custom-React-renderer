@@ -9,7 +9,7 @@
   "dependencies": {
     "fbjs": "0.8.4",
     "officegen": "^0.4.5",
-    "react": "6.0.0-alpha.4",
+    "react": "16.0.0-alpha.4",
     "react-dom": "16.0.0-alpha.4"
   },
   "devDependencies": {
