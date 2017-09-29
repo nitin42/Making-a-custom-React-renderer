@@ -1,4 +1,5 @@
 # Building a custom React renderer
+[![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
 
 > Let's make a custom React renderer 😎
 
