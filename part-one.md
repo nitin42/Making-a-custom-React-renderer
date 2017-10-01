@@ -1,11 +1,9 @@
 # Part-I
 
 This is part one of the tutorial. In this section, we will create a React reconciler for the current targeted version of 
-`React 16.0.0-alpha.4`. We are going to implement the renderer using Fiber. Earlier, React was using a **stack renderer** because it is implemented on the
-traditional JavaScript stack. On the other hand, Fiber is influenced by algebraic effects and functional ideas. It can thought of a 
-JavaScript object that contains information about a component, its input, and its output.
+`React 16.0.0-alpha.4`. We are going to implement the renderer using Fiber. Earlier, React was using a **stack renderer** as it was implemented on the traditional JavaScript stack. On the other hand, Fiber is influenced by algebraic effects and functional ideas. It can be thought of as a JavaScript object that contains information about a component, its input, and its output.
 
-Before you proceed further, I'll recommend you to read [this](https://github.com/acdlite/react-fiber-architecture) documentation on Fiber architecture by [Andrew Clark](https://twitter.com/acdlite?lang=en). This will make things
+Before we proceed further, I'll recommend you to read [this](https://github.com/acdlite/react-fiber-architecture) documentation on Fiber architecture by [Andrew Clark](https://twitter.com/acdlite?lang=en). This will make things
 easier for you.
 
 Let's get started!
@@ -65,7 +63,7 @@ const WordRenderer = ReactFiberReconciler({
   },
 
   insertBefore(parentInstance, child, beforeChild) {
-    // noob
+    // noop
   },
 
   // This is the final method which is called before flushing the root component to the host environment.
@@ -190,8 +188,8 @@ hostContext (`{}`) and internalInstanceHandle.
 
 **`appendInitialChild`**
 
-It appends the children. If children are wrapped inside a parent component (eg: `Document`), then add all the children to it else we 
-create a property called `document` on a parent node and append all the children to it. This will be helpful when we will parse the input component
+It appends the children. If children are wrapped inside a parent component (eg: `Document`), then we will add all the children to it else we 
+will create a property called `document` on a parent node and append all the children to it. This will be helpful when we will parse the input component
 and make a call to the render method of our component.
 
 Example - 
@@ -217,7 +215,7 @@ is required to make correct calls for example to create an element in html or in
 
 This is an identity relation which means that it always returns the same value that was used as its argument. It was added for the TestRenderers.
 
-We're done with the part one of our tutorial. I know some concepts are difficult to grok solely by looking at code. Initially it feels agitating but keep trying it and it will eventually make sense. When I first started learning about the Fiber architecture, I couldn't understand anything at all. I was frustated and dismayed but I used `console.log()` in every section of the above code and tried to understand its implementation and then there was this "Aha Aha" moment and it finally helped me to build [redocx](https://github.com/nitin42/redocx). Its a little perplexing to understand but you will get it eventually.
+We're done with the Part One of our tutorial. I know some concepts are difficult to grok solely by looking at code. Initially it feels agitating but keep trying it and it will eventually make sense. When I first started learning about the Fiber architecture, I couldn't understand anything at all. I was frustated and dismayed but I used `console.log()` in every section of the above code and tried to understand its implementation and then there was this "Aha Aha" moment and it finally helped me to build [redocx](https://github.com/nitin42/redocx). Its a little perplexing to understand but you will get it eventually.
 
 If you still have any doubts, DMs are open. I'm at [@NTulswani](https://twitter.com/NTulswani) on Twitter.
 
