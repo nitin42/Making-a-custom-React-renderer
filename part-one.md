@@ -1,7 +1,7 @@
 # Part-I
 
 This is part one of the tutorial. In this section, we will create a React reconciler for the current targeted version of 
-`React 16.0.0-alpha.4`. We are going to implement the renderer using Fiber. Earlier, React was using a **stack renderer** as it was implemented on the traditional JavaScript stack. On the other hand, Fiber is influenced by algebraic effects and functional ideas. It can be thought of as a JavaScript object that contains information about a component, its input, and its output.
+`React 16`. We are going to implement the renderer using Fiber. Earlier, React was using a **stack renderer** as it was implemented on the traditional JavaScript stack. On the other hand, Fiber is influenced by algebraic effects and functional ideas. It can be thought of as a JavaScript object that contains information about a component, its input, and its output.
 
 Before we proceed further, I'll recommend you to read [this](https://github.com/acdlite/react-fiber-architecture) documentation on Fiber architecture by [Andrew Clark](https://twitter.com/acdlite?lang=en). This will make things
 easier for you.
@@ -11,7 +11,7 @@ Let's get started!
 We will first install the dependencies.
 
 ```
-npm install react-dom@16.0.0-alpha.4 fbjs@0.8.4
+npm install react-dom@16 fbjs@0.8.4
 ```
 
 Let's import `ReactFiberReconciler` from `react-dom` and other modules also.
