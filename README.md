@@ -1,4 +1,6 @@
 # Building a custom React renderer
+> This tutorial currently relies on `React 16.0.0-alpha.4` but it will be updated to `react-reconciler` package once its stable enough to use. Read more about it [here](https://github.com/facebook/react/tree/master/packages/react-reconciler).
+
 [![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
 
 > Let's make a custom React renderer 😎
