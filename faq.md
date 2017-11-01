@@ -35,7 +35,7 @@ _createClass(MyDocument, [{
 }]);
 ```
 
-Thus we can use the above data to create an instance depending upon the type of an element and finally render the component.
+Thus we can use the above data to create an instance depending upon the type of an element. For eg - If the type of an element is 'TEXT', we create an instance `new Text(root, props)` and then render the component.
 
 #### What role does the `parse` function plays?
 
