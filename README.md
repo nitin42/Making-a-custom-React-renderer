@@ -1,5 +1,5 @@
 # Building a custom React renderer
-> This tutorial currently relies on `React 16.0.0-alpha.4` but it will be updated to `react-reconciler` package once its stable enough to use. Read more about it [here](https://github.com/facebook/react/tree/master/packages/react-reconciler).
+> This tutorial currently relies on `React 16.0.0-alpha.6` but it will be updated to `react-reconciler` package once its stable enough to use. Read more about it [here](https://github.com/facebook/react/tree/master/packages/react-reconciler).
 
 [![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
 
@@ -11,9 +11,9 @@
 
 ## Introduction
 
-This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts - 
+This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts -
 
-* **Part 1** - Creating a React reconciler (current targeted version React 16.0.0-alpha.4).
+* **Part 1** - Creating a React reconciler (current targeted version React 16.0.0-alpha.6).
 
 * **Part 2** - Creating a public interface to the reconciler i.e "Renderer".
 
@@ -25,11 +25,11 @@ This is a small tutorial on how to build your custom React renderer and render t
 
 ### [Part-I](./part-one.md)
 
-In part one, we will create a React reconciler for the current targeted version of React 16.0.0-alpha.4. We will implement the renderer using Fiber as it has a first-class renderer API for creating custom renderer.
+In part one, we will create a React reconciler for the current targeted version of React 16.0.0-alpha.6. We will implement the renderer using Fiber as it has a first-class renderer API for creating custom renderer.
 
 ### [Part-II](./part-two.md)
 
-In part two, we will create a public interface to the reconciler i.e a renderer. We will create a custom method for `createElement` and will also architect the component API for our example. 
+In part two, we will create a public interface to the reconciler i.e a renderer. We will create a custom method for `createElement` and will also architect the component API for our example.
 
 ### [Part-III](./part-three.md)
 
