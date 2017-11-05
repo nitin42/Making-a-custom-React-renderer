@@ -1,12 +1,9 @@
-import ReactFiberReconciler from 'react-dom/lib/ReactFiberReconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
 import createElement from '../utils/createElement';
 
-const WordRenderer = ReactFiberReconciler({
-  createInstance(type, props, rootContainerInstance, hostContext, internalInstanceHandle) {
-    return createElement(type, props, rootContainerInstance);
-  },
+const Reconciler = require('react-reconciler')
 
+const WordRenderer = Reconciler({
   // Add children
   appendInitialChild(parentInstance, child) {
     if (parentInstance.appendChild) {
@@ -16,44 +13,17 @@ const WordRenderer = ReactFiberReconciler({
     }
   },
 
-  appendChild(parentInstance, child) {
-    if (parentInstance.appendChild) {
-      parentInstance.appendChild(child);
-    } else {
-      parentInstance.document = child;
-    }
-  },
-  
-  removeChild(parentInstance, child) {
-    parentInstance.removeChild(child);
+  // Here we are passing the internal instance (root instance i.e WordDocument)
+  createInstance(type, props, internalInstanceHandle) {
+    return createElement(type, props, internalInstanceHandle);
   },
 
-  insertBefore(parentInstance, child, beforeChild) {
-    // noob
+  createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
+    return text;
   },
 
-  finalizeInitialChildren(testElement, type, props, rootContainerInstance) {
+  finalizeInitialChildren(wordElement, type, props) {
     return false;
-  },
-
-  prepareUpdate(testElement, type, oldProps, newProps, hostContext) {
-    return true;
-  },
-
-  commitUpdate(instance, type, oldProps, newProps, rootContainerInstance, internalInstanceHandle) {
-    // noop
-  },
-
-  commitMount(instance, type, newProps, rootContainerInstance, internalInstanceHandle) {
-    // noop
-  },
-  
-  getRootHostContext() {
-    return emptyObject;
-  },
-
-  getChildHostContext() {
-    return emptyObject;
   },
 
   getPublicInstance(inst) {
@@ -64,27 +34,75 @@ const WordRenderer = ReactFiberReconciler({
     // noop
   },
 
+  prepareUpdate(wordElement, type, oldProps, newProps) {
+    return true;
+  },
+
   resetAfterCommit() {
     // noop
   },
 
-  shouldSetTextContent(props) {
-    return false;
-  },
-
-  resetTextContent(testElement) {
+  resetTextContent(wordElement) {
     // noop
   },
 
-  createTextInstance(text, rootContainerInstance, hostContext, internalInstanceHandle) {
-    return text;
+  getRootHostContext() {
+    return emptyObject;
   },
 
-  commitTextUpdate(textInstance, oldText, newText) {
-    textInstance.chidren = newText;
+  getChildHostContext() {
+    return emptyObject;
   },
+
+  shouldSetTextContent(type, props) {
+    return false;
+  },
+
+  now: () => {},
 
   useSyncScheduling: true,
-});
+
+  mutation: {
+    appendChild(parentInstance, child) {
+      if (parentInstance.appendChild) {
+        parentInstance.appendChild(child);
+      } else {
+        parentInstance.document = child;
+      }
+    },
+
+    appendChildToContainer(parentInstance, child) {
+      if (parentInstance.appendChild) {
+        parentInstance.appendChild(child);
+      } else {
+        parentInstance.document = child;
+      }
+    },
+    
+    removeChild(parentInstance, child) {
+      parentInstance.removeChild(child);
+    },
+
+    removeChildFromContainer(parentInstance, child) {
+      parentInstance.removeChild(child);
+    },
+  
+    insertBefore(parentInstance, child, beforeChild) {
+      // noob
+    },
+  
+    commitUpdate(instance, updatePayload, type, oldProps, newProps) {
+      // noop
+    },
+  
+    commitMount(instance, updatePayload, type, oldProps, newProps) {
+      // noop
+    },
+  
+    commitTextUpdate(textInstance, oldText, newText) {
+      textInstance.children = newText;
+    },
+  }
+})
 
 export default WordRenderer;
