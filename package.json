@@ -7,10 +7,11 @@
   "author": "Nitin <tulswani19@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "fbjs": "0.8.4",
+    "fbjs": "^0.8.16",
     "officegen": "^0.4.5",
-    "react": "16.0.0-alpha.4",
-    "react-dom": "16.0.0-alpha.4"
+    "react": "^16.0.0",
+    "react-dom": "^16.0.0",
+    "react-reconciler": "^0.2.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
