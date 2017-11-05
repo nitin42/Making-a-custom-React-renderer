@@ -11,7 +11,7 @@ For our example we just need to implement two components, `Document` and `Text`.
 component (like `div`) and `Text` component is the main component for adding the text to our document.
 
 We will first create a root container (remember `rootContainerInstance` in our reconciler ?) for our components. This is responsible
-for creating a document instance for [officegen]().
+for creating a document instance for [officegen](https://github.com/Ziv-Barber/officegen).
 
 **`WordDocument.js`**
 

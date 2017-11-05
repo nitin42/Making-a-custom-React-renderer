@@ -1,4 +1,5 @@
 # Building a custom React renderer
+
 [![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
 
 > Let's make a custom React renderer 😎
@@ -11,7 +12,7 @@
 
 This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts - 
 
-* **Part 1** - Creating a React reconciler (current targeted version React 16).
+* **Part 1** - Creating a React reconciler (using [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) package).
 
 * **Part 2** - Creating a public interface to the reconciler i.e "Renderer".
 
@@ -23,7 +24,7 @@ This is a small tutorial on how to build your custom React renderer and render t
 
 ### [Part-I](./part-one.md)
 
-In part one, we will create a React reconciler for the current targeted version of React 16. We will implement the renderer using Fiber as it has a first-class renderer API for creating custom renderer.
+In part one, we will create a React reconciler using the [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) package. We will implement the renderer using Fiber as it has a first-class renderer API for creating custom renderer.
 
 ### [Part-II](./part-two.md)
 
