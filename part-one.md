@@ -158,7 +158,7 @@ A fiber is work on a component that needs to be done or was done. Atmost, a comp
 * **`child`** - `child`, `sibling` and `index` represents the **singly linked list data structure**.
 * **`sibling`**
 * **`index`**
-* **`ref`** - The ref last used to attach this node (parent).
+* **`ref`** - The ref last used to attach this (parent) node.
 
 * **`pendingProps`** - This property is useful when a tag is overloaded.
 * **`memoizedProps`** - The props used to create the output.
@@ -242,7 +242,65 @@ It is used to mark the current host context which is sent to update the payload 
 **`createTextInstance`**
 Creates an instance of a text node.
 
+## Injecting third party renderers into devtools
 
+You can also inject your renderer into react-devtools to debug the host components of your environment. Earlier, it wasn't possible for third party renderers but now using the return value of `reconciler` instance, it is possible to inject the renderer into react-devtools.
+
+> Note - This wasn't supported in `react-reconciler` version 0.2.0. So you'll need to update it to the current beta version 0.3.0-beta.1
+
+**Usage**
+
+Install standalone app for react-devtools
+
+```
+yarn add --dev react-devtools
+```
+
+Run
+
+```
+yarn react-devtools
+```
+
+or if you use npm,
+
+```
+npm install -g react-devtools
+```
+
+then run it with
+
+```
+react-devtools
+```
+
+```js
+const Reconciler = require('react-reconciler')
+
+let hostConfig = {
+  // See the above notes for adding methods here
+}
+
+const CustomRenderer = Reconciler(hostConfig)
+
+module.exports = CustomRenderer
+```
+
+Then in your `render` method,
+
+```js
+const CustomRenderer = require('./reconciler')
+
+function render(element, target, callback) {
+  ... // Here, schedule a top level update using CustomRenderer.updateContainer(), see Part-IV for more details.
+  CustomRenderer.injectIntoDevTools({
+    bundleType: 1, // 0 for PROD, 1 for DEV
+    version: '0.1.0', // version for your renderer
+    rendererPackageName: 'custom-renderer', // package name
+    findHostInstanceByFiber: CustomRenderer.findHostInstance // host instance (root)
+  }))
+}
+```
 
 We're done with the Part One of our tutorial. I know some concepts are difficult to grok solely by looking at code. Initially it feels agitating but keep trying it and it will eventually make sense. When I first started learning about the Fiber architecture, I couldn't understand anything at all. I was frustated and dismayed but I used `console.log()` in every section of the above code and tried to understand its implementation and then there was this "Aha Aha" moment and it finally helped me to build [redocx](https://github.com/nitin42/redocx). Its a little perplexing to understand but you will get it eventually.
 
