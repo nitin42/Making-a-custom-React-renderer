@@ -143,30 +143,36 @@ Example - Let's say we render,
 
 `createInstance` will then return the information about the `type` of an element (' TEXT '), props ( { children: 'Hello World' } ), and the root instance (`WordDocument`). 
 
+**Fiber**
+
+A fiber is work on a component that needs to be done or was done. Atmost, a component instance has two fibers, flushed fiber and work in progress fiber.
+
 `internalInstanceHandle` contains information about the `tag`, `type`, `key`, `stateNode`, and the return fiber. This object (fiber) further contains information about -
 
-* `tag`
-* `key`
-* `type`
-* `stateNode`
-* `return`
-* `child`
-* `sibling`
-* `index`
-* `ref`
-* `pendingProps`
-* `memoizedProps`
-* `updateQueue`
-* `memoizedState`
-* `effectTag`
-* `nextEffect`
-* `firstEffect`
+* **`tag`** - Type of fiber
+* **`key`** - Unique identifier of the child  
+* **`type`** - function/class/module associated with this fiber
+* **`stateNode`** - The local state associated with this fiber
+* **`return`** - This fiber to return to after finishing processing this one (parent fiber)
+* **`child`** - `child`, `sibling` and `index` represents the **singly linked list data structure**.
+* **`sibling`**
+* **`index`**
+* **`ref`** - The ref last used to attach this node (parent).
+* **`pendingProps`** - 
+* **`memoizedProps`** - The props used to create the output
+* **`updateQueue`** - A queue of state updates and callbacks
+* **`memoizedState`** - The state used to create the output
+* **`internalContextTag`** - Bit field data structure. React Fiber uses bit field data structures to hold a sequence of information about the fiber and it's subtree which is stored in an adjacent computer memory locations. A bit within this set is used to determine the state of an attribute. Collection of bit fields called flags represent the outcome of an operation or some intermediate state. React Fiber uses AsyncUpdates flag which indicates whether the subtree is async is or not.
+* **`effectTag`** - Effect
+* **`nextEffect`** - Singly linked list fast path to the next fiber with side-effects
+* **`firstEffect`** - The first(firstEffect) and last(lastEffect) fiber with side-effect within the subtree. We reuse the work done in this fiber.
+* **`expirationTime`** - This represents a time in the future by which this work should be completed.
+* **`alternate`** - Pooled version of fiber which has contains information about the fiber and is ready to be used rather than allocated on use. In computer graphics, this concept is abstracted in **double buffer** pattern. It uses more memory but we can clean up the pairs.
 * `pendingWorkPriority`
 * `progressedPriority`
 * `progressedChild`
 * `progressedFirstDeletion`
 * `progressedLastDeletion`
-* `alternate`
 
 **`appendInitialChild`**
 
