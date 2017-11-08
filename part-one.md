@@ -154,7 +154,7 @@ A fiber is work on a component that needs to be done or was done. Atmost, a comp
 * **`type`** - function/class/module associated with this fiber.
 * **`stateNode`** - The local state associated with this fiber.
 
-* **`return`** - This fiber to return to after finishing processing this one (parent fiber).
+* **`return`** - The fiber to return to after finishing processing this one (parent fiber).
 * **`child`** - `child`, `sibling` and `index` represents the **singly linked list data structure**.
 * **`sibling`**
 * **`index`**
