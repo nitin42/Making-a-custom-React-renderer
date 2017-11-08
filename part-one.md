@@ -199,6 +199,10 @@ It computes the diff for an instance. Fiber can reuse this work even if it pause
 
 Commit the update or apply the diff calculated to the host environment's node (WordDocument).
 
+**`commitMount`**
+
+Renderer mounts the host component but may schedule some work to done after like auto-focus on forms. The host components are only mounted when there is no current/alternate fiber.
+
 **`hostContext`**
 
 Host context is an internal object which our renderer may use based on the current location in the tree. In DOM, this object 
@@ -207,6 +211,38 @@ is required to make correct calls for example to create an element in html or in
 **`getPublicInstance`**
 
 This is an identity relation which means that it always returns the same value that was used as its argument. It was added for the TestRenderers.
+
+**`useSyncScheduling`**
+This property is used to down prioritize the children by checking whether the children are offscreen or not. In other words, if this property is true then the work in progress fiber has no expiration time
+
+**`resetTextContent`**
+Reset the text content of the parent before doing any insertions (inserting host nodes into the parent). This is similar to double buffering technique in OpenGl where the buffer is cleared before writing new pixels to it and perform rasterization.
+
+**`commitTextUpdate`**
+Similar to `commitUpdate` but it commits the update payload for the text nodes.
+
+**`removeChild and removeChildFromContainer`**
+When we're inside a host component that was removed, it is now ok to remove the node from the tree. If the return fiber (parent) is container, then we remove the node from container using `removeChildFromContainer` else we simply use `removeChild`.
+
+**`insertBefore`**
+It is a `commitPlacement` hook and is called when all the nodes are recursively inserted into parent. This is abstracted into a function named `getHostSibling` which continues to search the tree until it finds a sibling host node (React will change this methodology may be in next release because it's not an efficient way as it leads to exponential search complexity)
+
+**`appendChildToContainer`**
+If type of fiber is a `HostRoot` or `HostPortal` then the child is added to that container.
+
+**`appendChild`**
+Child is added to the parent.
+
+**`shouldSetTextContent`**
+If it returns false then schedule the text content to be reset.
+
+**`getHostContext`**
+It is used to mark the current host context which is sent to update the payload and therefore update the queue of work in progress fiber (may indicate there is a change).
+
+**`createTextInstance`**
+Creates an instance of a text node.
+
+
 
 We're done with the Part One of our tutorial. I know some concepts are difficult to grok solely by looking at code. Initially it feels agitating but keep trying it and it will eventually make sense. When I first started learning about the Fiber architecture, I couldn't understand anything at all. I was frustated and dismayed but I used `console.log()` in every section of the above code and tried to understand its implementation and then there was this "Aha Aha" moment and it finally helped me to build [redocx](https://github.com/nitin42/redocx). Its a little perplexing to understand but you will get it eventually.
 
