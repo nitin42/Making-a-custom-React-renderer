@@ -15,6 +15,13 @@ async function render(element, filePath) {
   // Schedules a top level update with current fiber and a priority level (depending upon the context)
   WordRenderer.updateContainer(element, node, null);
 
+  WordRenderer.injectIntoDevTools({
+    bundleType: 1,
+    version: '0.1.0',
+    rendererPackageName: 'custom-renderer',
+    findHostInstanceByFiber: WordRenderer.findHostInstance
+  }))
+
   // Parse the input component and return the output
   const output = parse(container).toBuffer();
 
