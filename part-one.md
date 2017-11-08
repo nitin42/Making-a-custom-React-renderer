@@ -170,7 +170,7 @@ A fiber is work on a component that needs to be done or was done. Atmost, a comp
 * **`nextEffect`** - Singly linked list fast path to the next fiber with side-effects.
 * **`firstEffect`** - The first(firstEffect) and last(lastEffect) fiber with side-effect within the subtree. Reuse the work done in this fiber.
 
-* **`expirationTime`** - This represents a time in the future by which this work should be completed.
+* **`expirationTime`** - This represents a time in the future by which the work should be completed.
 * **`alternate`** - Pooled version of fiber which has contains information about the fiber and is ready to be used rather than allocated on use. In computer graphics, this concept is abstracted in **double buffer** pattern. It uses more memory but we can clean up the pairs.
 
 * `pendingWorkPriority`
