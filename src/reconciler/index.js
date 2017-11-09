@@ -1,10 +1,9 @@
 import emptyObject from 'fbjs/lib/emptyObject';
-import createElement from '../utils/createElement';
+import {createElement, getHostContextNode} from '../utils/createElement';
 
 const Reconciler = require('react-reconciler')
 
 const WordRenderer = Reconciler({
-  // Add children
   appendInitialChild(parentInstance, child) {
     if (parentInstance.appendChild) {
       parentInstance.appendChild(child);
@@ -13,9 +12,8 @@ const WordRenderer = Reconciler({
     }
   },
 
-  // Here we are passing the internal instance (root instance i.e WordDocument)
   createInstance(type, props, internalInstanceHandle) {
-    return createElement(type, props, internalInstanceHandle);
+    return createElement(type, props);
   },
 
   createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
@@ -46,11 +44,11 @@ const WordRenderer = Reconciler({
     // noop
   },
 
-  getRootHostContext() {
-    return emptyObject;
+  getRootHostContext(instance) {
+    return getHostContextNode(instance)
   },
 
-  getChildHostContext() {
+  getChildHostContext(instance) {
     return emptyObject;
   },
 
