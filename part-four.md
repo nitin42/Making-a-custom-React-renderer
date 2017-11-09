@@ -10,7 +10,7 @@ Now we just need to create a `render` method to flush everything to the host env
 ```js
 
 import fs from 'fs';
-import createElement from '../utils/createElement';
+import { createElement } from '../utils/createElement';
 import { WordRenderer } from './renderer';
 import parse from './parse';
 
