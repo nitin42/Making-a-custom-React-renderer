@@ -19,7 +19,7 @@ Let's import the `Reconciler` from `react-reconciler` and also the other modules
 import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
 
-import createElement from './utils/createElement';
+import { createElement, getHostContextNode } from './utils/createElement';
 ```
 
 Notice we have also imported `createElement` function. Don't worry, we will implement it afterwards.
@@ -38,7 +38,7 @@ const WordRenderer = Reconciler({
   },
 
   createInstance(type, props, internalInstanceHandle) {
-    return createElement(type, props, internalInstanceHandle);
+    return createElement(type, props);
   },
 
   createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
@@ -69,8 +69,8 @@ const WordRenderer = Reconciler({
     // noop
   },
 
-  getRootHostContext() {
-    return emptyObject;
+  getRootHostContext(rootInstance) {
+    return getHostContextNode(rootInstance);
   },
 
   getChildHostContext() {
@@ -237,10 +237,18 @@ Child is added to the parent.
 If it returns false then schedule the text content to be reset.
 
 **`getHostContext`**
-It is used to mark the current host context which is sent to update the payload and therefore update the queue of work in progress fiber (may indicate there is a change).
+It is used to mark the current host context (root instance) which is sent to update the payload and therefore update the queue of work in progress fiber (may indicate there is a change).
 
 **`createTextInstance`**
 Creates an instance of a text node.
+
+### Note
+
+* You should **NOT** rely on Fiber data structure itself. Consider its fields private.
+* Treat 'internalInstanceHandle' as an opaque object itself.
+* Use host context methods for getting data from roots.
+
+> The above points were added to the tutorial after a discussion with [Dan Abramov](https://twitter.com/dan_abramov) regarding the host config methods and Fiber properties.
 
 ## Injecting third party renderers into devtools
 
