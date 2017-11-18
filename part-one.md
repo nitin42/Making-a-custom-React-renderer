@@ -19,7 +19,7 @@ Let's import the `Reconciler` from `react-reconciler` and also the other modules
 import Reconciler from 'react-reconciler';
 import emptyObject from 'fbjs/lib/emptyObject';
 
-import { createElement, getHostContextNode } from './utils/createElement';
+import { createElement } from './utils/createElement';
 ```
 
 Notice we have also imported `createElement` function. Don't worry, we will implement it afterwards.
@@ -38,7 +38,7 @@ const WordRenderer = Reconciler({
   },
 
   createInstance(type, props, internalInstanceHandle) {
-    return createElement(type, props);
+    return createElement(type, props, internalInstanceHandle);
   },
 
   createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
@@ -70,7 +70,7 @@ const WordRenderer = Reconciler({
   },
 
   getRootHostContext(rootInstance) {
-    return getHostContextNode(rootInstance);
+    // You can use this 'rootInstance' to pass data from the roots.
   },
 
   getChildHostContext() {
