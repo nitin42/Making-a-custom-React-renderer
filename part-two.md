@@ -175,34 +175,18 @@ This is similar to the `React.createElement()` for DOM as a target.
 ```js
 import { Document, Text, WordDocument } from '../components/index';
 
-// Stores the root container instance
-let ROOT_NODE_INSTANCE = null
-
-/**
- * Updates the ref to ROOT_NODE_INSTANCE
- * @param { object } rootNode root instance
- */
-function getHostContextNode(rootNode) {
-  if (typeof rootNode !== undefined) {
-    return ROOT_NODE_INSTANCE = rootNode
-  } else {
-    console.warn(`${rootNode} is not an instance of officegen docx constructor.`)    
-    // Lazily create the instance
-    // (escape hatch if the global state is mutated by an error in host config)
-    return ROOT_NODE_INSTANCE = new WordDocument()
-  }
-}
 /**
  * Creates an element for a document
  * @param {string} type Element type
  * @param {Object} props Component props
+ * @param {Object} root Root instance
  */
-function createElement(type, props) {
+function createElement(type, props, root) {
 
   const COMPONENTS = {
     ROOT: () => new WordDocument(),
-    TEXT: () => new Text(ROOT_NODE_INSTANCE, props),
-    DOCUMENT: () => new Document(ROOT_NODE_INSTANCE, props),
+    TEXT: () => new Text(root, props),
+    DOCUMENT: () => new Document(root, props),
     default: undefined,
   };
 
@@ -211,9 +195,7 @@ function createElement(type, props) {
 
 export {
   createElement,
-  getHostContextNode,
 }
-
 ```
 
 I think you can easily understand what's happening inside the `createElement` method. It takes an element, props, and the root instance.
