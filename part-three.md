@@ -14,7 +14,7 @@ const parse = (input) => {
   function parseComponent(inputComponent) {
     const document = inputComponent.document;
     
-    document.render();
+    document.render(); // Flush everything
 
     return inputComponent;
   }

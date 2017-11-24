@@ -7,8 +7,10 @@ of `createElement` method.
 
 ## Components
 
-For our example we just need to implement two components, `Document` and `Text`. A `Document` component is a wrapper or say parent
+For our example, we'll only implement two components, `Document` and `Text`. A `Document` component is a wrapper or say parent
 component (like `div`) and `Text` component is the main component for adding the text to our document.
+
+> Text component, however, doesn't create specific text node. It works differently when compared to the DOM APIs.
 
 We will first create a root container (remember `rootContainerInstance` in our reconciler ?) for our components. This is responsible
 for creating a document instance for [officegen](https://github.com/Ziv-Barber/officegen).
