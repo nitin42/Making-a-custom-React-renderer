@@ -23,7 +23,7 @@ async function render(element, filePath) {
   WordRenderer.updateContainer(element, node, null);
 
   const output = parse(container).toBuffer();
-  
+
   const stream = fs.createWriteStream(filePath);
 
   await new Promise((resolve, reject) => {
@@ -68,7 +68,7 @@ Finally we parse our input component to render all the children and props and ge
 
 Still having some doubts? Check out the [FAQs](./faq.md).
 
-Congrats! You've have successfully completed the tutorial. Full source code for the tutorial is already available in this repository ([src](./src)). If you want to read the whole source code then follow this order - 
+Congrats! You've have successfully completed the tutorial. Full source code for the tutorial is already available in this repository ([src](./src)). If you want to read the whole source code then follow this order -
 
 [`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement) => [`parse the input component`](./src/parse/index.js) => [`render method`](./src/render/index.js)
 

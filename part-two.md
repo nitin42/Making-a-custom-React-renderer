@@ -42,16 +42,16 @@ class Document {
   constructor(root, props) {
     this.root = root;
     this.props = props;
-    
+
     // Create a new paragraph
     this.adder = this.root.doc.createP();
   }
-  
+
   // Add children
   appendChild(child) {
     this.children.push(child);
   }
-  
+
   // Remove children
   removeChild(child) {
     const index = this.children.indexOf(child);
@@ -83,10 +83,10 @@ Let's see what's going on here!
 
 **`constructor()`**
 
-In our `constructor`, we initialise the `root` instance and `props`. We also create a reference to our `doc` instance which we created earlier in `WordDocument.js`. This reference is then 
+In our `constructor`, we initialise the `root` instance and `props`. We also create a reference to our `doc` instance which we created earlier in `WordDocument.js`. This reference is then
 use to create paragraph by adding text nodes to it.
 
-Example - 
+Example -
 
 ```
 this.adder.addText(__someText__)
@@ -136,7 +136,7 @@ class Text {
   constructor(root, props) {
     this.root = root;
     this.props = props;
-    
+
     this.adder = this.root.doc.createP();
   }
 

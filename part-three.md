@@ -13,7 +13,7 @@ create a function for parsing the input component (input to the `render` method)
 const parse = (input) => {
   function parseComponent(inputComponent) {
     const document = inputComponent.document;
-    
+
     document.render(); // Flush everything
 
     return inputComponent;
@@ -46,13 +46,13 @@ function parseComponent(inputComponent) {
 ```
 
 In the above function, we create a variable `document` that represents a parentInstance or a component we want to render.
-This property is accessible only because of - 
+This property is accessible only because of -
 
 ```js
 appendInitialChild(parentInstance, child) {
   // if (parentInstance.appendChild) {
     // parentInstance.appendChild(child);
-  // } 
+  // }
   else {
     parentInstance.document = child; 👈
   }
