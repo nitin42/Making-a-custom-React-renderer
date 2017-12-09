@@ -12,7 +12,7 @@ Let's get started!
 We will first install the dependencies.
 
 ```
-npm install react-reconciler@0.2.0 fbjs@0.8.16
+npm install react-reconciler@0.7.0 fbjs@0.8.16
 ```
 
 Let's import the `Reconciler` from `react-reconciler` and also the other modules.
@@ -103,7 +103,7 @@ const WordRenderer = Reconciler({
         parentInstance.document = child;
       }
     },
-    
+
     removeChild(parentInstance, child) {
       parentInstance.removeChild(child);
     },
@@ -111,19 +111,19 @@ const WordRenderer = Reconciler({
     removeChildFromContainer(parentInstance, child) {
       parentInstance.removeChild(child);
     },
-  
+
     insertBefore(parentInstance, child, beforeChild) {
       // noob
     },
-  
+
     commitUpdate(instance, updatePayload, type, oldProps, newProps) {
       // noop
     },
-  
+
     commitMount(instance, updatePayload, type, oldProps, newProps) {
       // noop
     },
-  
+
     commitTextUpdate(textInstance, oldText, newText) {
       textInstance.children = newText;
     },
@@ -141,9 +141,9 @@ Example - Let's say we render,
 
 ```js
 <Text>Hello World</Text>
-```  
+```
 
-`createInstance` will then return the information about the `type` of an element (' TEXT '), props ( { children: 'Hello World' } ), and the root instance (`WordDocument`). 
+`createInstance` will then return the information about the `type` of an element (' TEXT '), props ( { children: 'Hello World' } ), and the root instance (`WordDocument`).
 
 **Fiber**
 
@@ -183,11 +183,11 @@ A fiber is work on a component that needs to be done or was done. Atmost, a comp
 
 **`appendInitialChild`**
 
-It appends the children. If children are wrapped inside a parent component (eg: `Document`), then we will add all the children to it else we 
+It appends the children. If children are wrapped inside a parent component (eg: `Document`), then we will add all the children to it else we
 will create a property called `document` on a parent node and append all the children to it. This will be helpful when we will parse the input component
 and make a call to the render method of our component.
 
-Example - 
+Example -
 
 ```js
 const data = document.render(); // returns the output
@@ -207,7 +207,7 @@ Renderer mounts the host component but may schedule some work to done after like
 
 **`hostContext`**
 
-Host context is an internal object which our renderer may use based on the current location in the tree. In DOM, this object 
+Host context is an internal object which our renderer may use based on the current location in the tree. In DOM, this object
 is required to make correct calls for example to create an element in html or in MathMl based on current context.
 
 **`getPublicInstance`**
@@ -255,8 +255,6 @@ Creates an instance of a text node.
 ## Injecting third party renderers into devtools
 
 You can also inject your renderer into react-devtools to debug the host components of your environment. Earlier, it wasn't possible for third party renderers but now using the return value of `reconciler` instance, it is possible to inject the renderer into react-devtools.
-
-> Note - This wasn't supported in `react-reconciler` version 0.2.0. So you'll need to update it to the current beta version 0.3.0-beta.1
 
 **Usage**
 
