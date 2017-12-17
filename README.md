@@ -10,7 +10,7 @@
 
 ## Introduction
 
-This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts - 
+This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts -
 
 * **Part 1** - Creating a React reconciler (using [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) package).
 
@@ -28,7 +28,7 @@ In part one, we will create a React reconciler using the [`react-reconciler`](ht
 
 ### [Part-II](./part-two.md)
 
-In part two, we will create a public interface to the reconciler i.e a renderer. We will create a custom method for `createElement` and will also architect the component API for our example. 
+In part two, we will create a public interface to the reconciler i.e a renderer. We will create a custom method for `createElement` and will also architect the component API for our example.
 
 ### [Part-III](./part-three.md)
 
