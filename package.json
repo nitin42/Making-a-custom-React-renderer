@@ -6,6 +6,9 @@
   "repository": "https://github.com/nitin42/Making-a-custom-React-renderer.git",
   "author": "Nitin <tulswani19@gmail.com>",
   "license": "MIT",
+  "engines": {
+    "node": ">=8.1.2"
+  },
   "dependencies": {
     "fbjs": "^0.8.16",
     "officegen": "^0.4.5",
