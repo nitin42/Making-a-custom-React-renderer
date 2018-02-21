@@ -85,8 +85,6 @@ const WordRenderer = Reconciler({
 
   now: () => performance.now(),
 
-  useSyncScheduling: true,
-
   mutation: {
     appendChild(parentInstance, child) {
       if (parentInstance.appendChild) {
@@ -213,9 +211,6 @@ is required to make correct calls for example to create an element in html or in
 **`getPublicInstance`**
 
 This is an identity relation which means that it always returns the same value that was used as its argument. It was added for the TestRenderers.
-
-**`useSyncScheduling`**
-This property is used to down prioritize the children by checking whether the children are offscreen or not. In other words, if this property is true then the work in progress fiber has no expiration time
 
 **`resetTextContent`**
 Reset the text content of the parent before doing any insertions (inserting host nodes into the parent). This is similar to double buffering technique in OpenGl where the buffer is cleared before writing new pixels to it and perform rasterization.
