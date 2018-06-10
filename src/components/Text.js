@@ -1,33 +1,22 @@
+import { noop } from '../utils/noop'
+import { appendChild } from '../utils/appendChild'
+
 class Text {
-  children = [];
-  
-  constructor(root, props) {
-    this.root = root;
-    this.props = props;
+	constructor(root, props) {
+		this.root = root
+		this.props = props
 
-    this.adder = this.root.doc.createP();
-  }
+		this.adder = this.root.doc.createP()
+	}
 
-  appendChild(child) {
-    this.children.push(child);
-  }
+	appendChild(child) {
+		appendChild.call(this, child)
+	}
 
-  removeChild(child) {
-    const index = this.children.indexOf(child);
-    this.children.splice(index, 1);
-  }
-
-  renderChildren() {
-    for (let i = 0; i < this.children.length; i += 1) {
-      if (typeof this.children[i] === 'string') {
-        this.adder.addText(this.children[i]);
-      } // else { some_custom_method(); } here it's upto you how do you handle the nested components. For our example, we won't go into much details.
-    }
-  }
-
-  render() {
-    this.renderChildren();
-  }
+	render() {
+		// We already have appended the child node using `addText` in appendChild, so it's safe to return noop
+		noop()
+	}
 }
 
-export default Text;
+export default Text

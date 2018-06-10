@@ -1,37 +1,23 @@
+import { noop } from '../utils/noop'
+import { appendChild } from '../utils/appendChild'
+
 class Document {
-  // Stores all the children
-  children = [];
+	constructor(root, props) {
+		this.root = root
+		this.props = props
 
-  constructor(root, props) {
-    this.root = root;
-    this.props = props;
+		// docx instance for adding text nodes (Note - This text nodes are different when compared to DOM)
+		this.adder = this.root.doc.createP()
+	}
 
-    // docx instance for adding text nodes (Note - This text nodes are different when compared to DOM)
-    this.adder = this.root.doc.createP();
-  }
+	appendChild(child) {
+		appendChild.call(this, child)
+	}
 
-  appendChild(child) {
-    this.children.push(child);
-  }
-
-  removeChild(child) {
-    const index = this.children.indexOf(child);
-    this.children.splice(index, 1);
-  }
-
-  renderChildNode() {
-    for (let i = 0; i < this.children.length; i += 1) {
-      if (typeof this.children[i] === 'string') {
-        this.adder.addText(this.children[i]);
-      } else if (typeof this.children[i] === 'object') {
-        this.children[i].render();
-      }
-    }
-  }
-
-  render() {
-    this.renderChildNode();
-  }
+	render() {
+		// We already have appended the child node using `addText` in appendChild, so it's safe to return noop
+		noop()
+	}
 }
 
-export default Document;
+export default Document

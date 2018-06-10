@@ -1,20 +1,20 @@
-const parse = (input) => {
-  function parseComponent(inputComponent) {
-    const document = inputComponent.document;
+const parse = input => {
+	function parseComponent(inputComponent) {
+		const document = inputComponent.document
 
-    // Render all the children and props
-    document.render();
-    
-    return inputComponent;
-  }
+		// Render all the children and props
+		document.render()
 
-  function toBuffer() {
-    return parseComponent(input);
-  }
+		return inputComponent
+	}
 
-  return {
-    toBuffer,
-  };
-};
+	function toBuffer() {
+		return parseComponent(input)
+	}
 
-export default parse;
+	return {
+		toBuffer,
+	}
+}
+
+export default parse

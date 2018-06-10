@@ -1,13 +1,13 @@
-import createElement from './utils/createElement';
-import WordRenderer from './reconciler';
+import { createElement } from './utils/createElement'
+import WordRenderer from './reconciler'
 
 function render(element) {
-  const container = createElement('ROOT');
-  const node = WordRenderer.createContainer(container);
+	const container = createElement('ROOT')
+	const node = WordRenderer.createContainer(container)
 
-  WordRenderer.updateContainer(element, node, null);
+	WordRenderer.updateContainer(element, node, null)
 
-  return container;
+	return container
 }
 
-export default render;
+export default render

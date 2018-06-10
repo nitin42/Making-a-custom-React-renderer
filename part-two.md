@@ -18,16 +18,16 @@ for creating a document instance for [officegen](https://github.com/Ziv-Barber/o
 **`WordDocument.js`**
 
 ```js
-import officegen from 'officegen';
+import officegen from 'officegen'
 
 // This creates the document instance
 class WordDocument {
-  constructor() {
-    this.doc = officegen('docx');
-  }
+	constructor() {
+		this.doc = officegen('docx')
+	}
 }
 
-export default WordDocument;
+export default WordDocument
 ```
 
 Now let's create our `Document` component.
@@ -35,48 +35,28 @@ Now let's create our `Document` component.
 **`Document.js`**
 
 ```js
+import { noop } from '../utils/noop'
+import { appendChild } from '../utils/appendChild'
+
 class Document {
-  // Store all the children here
-  children = [];
+	constructor(root, props) {
+		this.root = root
+		this.props = props
 
-  constructor(root, props) {
-    this.root = root;
-    this.props = props;
+		// docx instance for adding text nodes (Note - This text nodes are different when compared to DOM)
+		this.adder = this.root.doc.createP()
+	}
 
-    // Create a new paragraph
-    this.adder = this.root.doc.createP();
-  }
+	appendChild(child) {
+		appendChild.call(this, child)
+	}
 
-  // Add children
-  appendChild(child) {
-    this.children.push(child);
-  }
-
-  // Remove children
-  removeChild(child) {
-    const index = this.children.indexOf(child);
-    this.children.splice(index, 1);
-  }
-
-  renderChildren() {
-    for (let i = 0; i < this.children.length; i += 1) {
-      if (typeof this.children[i] === 'string') {
-        // If not a component, render it as a paragraph
-        this.adder.addText(this.children[i]);
-      } else if (typeof this.children[i] === 'object') {
-        // We know it's a component so just call the render() method
-        this.children[i].render();
-      }
-    }
-  }
-
-  render() {
-    this.renderChildren();
-  }
+	render() {
+		noop()
+	}
 }
 
-export default Document;
-
+export default Document
 ```
 
 Let's see what's going on here!
@@ -94,7 +74,7 @@ this.adder.addText(__someText__)
 
 **`appendChild`**
 
-This method appends the children to our `children` array. Remember we used this in our reconciler's `appendInitialChild` method to check whether the
+This method appends the child nodes using the platform specific function for `docx` i.e `appendChild`. Remember we used this in our reconciler's `appendInitialChild` method to check whether the
 parent instance has a method called `appendChild` or not !?
 
 ```js
@@ -109,64 +89,64 @@ appendInitialChild(parentInstance, child) {
 
 **`removeChild`**
 
-This method removes a child node from our `children` array. Again we used this in our reconciler.
-
-```js
-removeChild(parentInstance, child) {
-  parentInstance.removeChild(child);
-}
-```
-
-**`renderChildren`**
-
-This method renders all the children of our `Document` component. If we find that the type of `children` is a string, we use it to
-render a paragraph or if it's an object (containing information about the `root`, `type`, `key`, `ref`) then we know it's a
-component and we just call it's render method.
+This method removes a child node. Again we used this in our reconciler.
 
 **`render`**
 
-Finally we render all the children by calling `this.renderChildren()`.
+As we already have appended the child node using `appendChild`, so it's safe to return noop. However, this may vary in your host environment where you might want to render something initially.
 
 Let's create the `Text` component
 
 `Text.js`
 
 ```js
+import { noop } from '../utils/noop'
+import { appendChild } from '../utils/appendChild'
+
 class Text {
-  constructor(root, props) {
-    this.root = root;
-    this.props = props;
+	constructor(root, props) {
+		this.root = root
+		this.props = props
 
-    this.adder = this.root.doc.createP();
-  }
+		this.adder = this.root.doc.createP()
+	}
 
-  appendChild(child) {
-    this.children.push(child);
-  }
+	appendChild(child) {
+		appendChild.call(this, child)
+	}
 
-  removeChild(child) {
-    const index = this.children.indexOf(child);
-    this.children.splice(index, 1);
-  }
-
-  renderChildren() {
-    for (let i = 0; i < this.children.length; i += 1) {
-      if (typeof this.children[i] === 'string') {
-        this.adder.addText(this.children[i]);
-      } // else { some_custom_method(); } here it's upto you how do you handle the nested components. For our example, we won't go into much details.
-    }
-  }
-
-  render() {
-    this.renderChildren();
-  }
+	render() {
+		// We already have appended the child node using `addText` in appendChild, so it's safe to return noop
+		noop()
+	}
 }
 
-export default Text;
-
+export default Text
 ```
 
-Again, everything is similar to the `Document` component except that we pass each child node to `addText()` to render a paragraph.
+Implementation for `Text` is similar to the `Document` component.
+
+```js
+// noop.js
+
+export const noop = () => {}
+```
+
+```js
+// appendChild.js
+
+// Platform specific API for appending child nodes
+// Note: This will vary in different host environments. For example - In browser, you will use document.appendChild(child)
+export function appendChild(child) {
+	if (typeof child === 'string') {
+		// Add the string and render the text node
+		this.adder.addText(child)
+	} else if (typeof child === 'object') {
+		// It's a component
+		child.render()
+	}
+}
+```
 
 ## createElement
 
@@ -175,7 +155,7 @@ This is similar to the `React.createElement()` for DOM as a target.
 **`createElement.js`**
 
 ```js
-import { Document, Text, WordDocument } from '../components/index';
+import { Document, Text, WordDocument } from '../components/index'
 
 /**
  * Creates an element for a document
@@ -184,20 +164,17 @@ import { Document, Text, WordDocument } from '../components/index';
  * @param {Object} root Root instance
  */
 function createElement(type, props, root) {
+	const COMPONENTS = {
+		ROOT: () => new WordDocument(),
+		TEXT: () => new Text(root, props),
+		DOCUMENT: () => new Document(root, props),
+		default: undefined,
+	}
 
-  const COMPONENTS = {
-    ROOT: () => new WordDocument(),
-    TEXT: () => new Text(root, props),
-    DOCUMENT: () => new Document(root, props),
-    default: undefined,
-  };
-
-  return COMPONENTS[type]() || COMPONENTS.default;
+	return COMPONENTS[type]() || COMPONENTS.default
 }
 
-export {
-  createElement,
-}
+export { createElement }
 ```
 
 I think you can easily understand what's happening inside the `createElement` method. It takes an element, props, and the root instance.
