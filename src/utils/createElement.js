@@ -1,14 +1,16 @@
 import { Document, Text, WordDocument } from '../components/';
 
-let ROOT_NODE_INSTANCE = null
+let ROOT_NODE_INSTANCE = null;
 
 function getHostContextNode(rootNode) {
   if (typeof rootNode !== undefined) {
-    return ROOT_NODE_INSTANCE = rootNode
+    return (ROOT_NODE_INSTANCE = rootNode);
   } else {
-    console.warn(`${rootNode} is not an instance of officegen docx constructor.`)    
-    
-    return ROOT_NODE_INSTANCE = new WordDocument()
+    console.warn(
+      `${rootNode} is not an instance of officegen docx constructor.`
+    );
+
+    return (ROOT_NODE_INSTANCE = new WordDocument());
   }
 }
 
@@ -18,13 +20,10 @@ function createElement(type, props) {
     ROOT: () => new WordDocument(),
     TEXT: () => new Text(ROOT_NODE_INSTANCE, props),
     DOCUMENT: () => new Document(ROOT_NODE_INSTANCE, props),
-    default: undefined,
+    default: undefined
   };
 
   return COMPONENTS[type]() || COMPONENTS.default;
 }
 
-export {
-  createElement,
-  getHostContextNode,
-}
+export { createElement, getHostContextNode };

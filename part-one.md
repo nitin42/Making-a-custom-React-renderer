@@ -18,10 +18,10 @@ npm install react-reconciler@0.7.0 fbjs@0.8.16
 Let's import the `Reconciler` from `react-reconciler` and also the other modules.
 
 ```js
-import Reconciler from 'react-reconciler'
-import emptyObject from 'fbjs/lib/emptyObject'
+import Reconciler from 'react-reconciler';
+import emptyObject from 'fbjs/lib/emptyObject';
 
-import { createElement } from './utils/createElement'
+import { createElement } from './utils/createElement';
 ```
 
 Notice we have also imported `createElement` function. Don't worry, we will implement it afterwards.
@@ -31,102 +31,102 @@ some methods which can be thought of as lifecycle of a renderer (update, append 
 
 ```js
 const WordRenderer = Reconciler({
-	appendInitialChild(parentInstance, child) {
-		if (parentInstance.appendChild) {
-			parentInstance.appendChild(child)
-		} else {
-			parentInstance.document = child
-		}
-	},
+  appendInitialChild(parentInstance, child) {
+    if (parentInstance.appendChild) {
+      parentInstance.appendChild(child);
+    } else {
+      parentInstance.document = child;
+    }
+  },
 
-	createInstance(type, props, internalInstanceHandle) {
-		return createElement(type, props, internalInstanceHandle)
-	},
+  createInstance(type, props, internalInstanceHandle) {
+    return createElement(type, props, internalInstanceHandle);
+  },
 
-	createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-		return text
-	},
+  createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
+    return text;
+  },
 
-	finalizeInitialChildren(wordElement, type, props) {
-		return false
-	},
+  finalizeInitialChildren(wordElement, type, props) {
+    return false;
+  },
 
-	getPublicInstance(inst) {
-		return inst
-	},
+  getPublicInstance(inst) {
+    return inst;
+  },
 
-	prepareForCommit() {
-		// noop
-	},
+  prepareForCommit() {
+    // noop
+  },
 
-	prepareUpdate(wordElement, type, oldProps, newProps) {
-		return true
-	},
+  prepareUpdate(wordElement, type, oldProps, newProps) {
+    return true;
+  },
 
-	resetAfterCommit() {
-		// noop
-	},
+  resetAfterCommit() {
+    // noop
+  },
 
-	resetTextContent(wordElement) {
-		// noop
-	},
+  resetTextContent(wordElement) {
+    // noop
+  },
 
-	getRootHostContext(rootInstance) {
-		// You can use this 'rootInstance' to pass data from the roots.
-	},
+  getRootHostContext(rootInstance) {
+    // You can use this 'rootInstance' to pass data from the roots.
+  },
 
-	getChildHostContext() {
-		return emptyObject
-	},
+  getChildHostContext() {
+    return emptyObject;
+  },
 
-	shouldSetTextContent(type, props) {
-		return false
-	},
+  shouldSetTextContent(type, props) {
+    return false;
+  },
 
-	now: () => performance.now(),
+  now: () => performance.now(),
 
-	mutation: {
-		appendChild(parentInstance, child) {
-			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child)
-			} else {
-				parentInstance.document = child
-			}
-		},
+  mutation: {
+    appendChild(parentInstance, child) {
+      if (parentInstance.appendChild) {
+        parentInstance.appendChild(child);
+      } else {
+        parentInstance.document = child;
+      }
+    },
 
-		appendChildToContainer(parentInstance, child) {
-			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child)
-			} else {
-				parentInstance.document = child
-			}
-		},
+    appendChildToContainer(parentInstance, child) {
+      if (parentInstance.appendChild) {
+        parentInstance.appendChild(child);
+      } else {
+        parentInstance.document = child;
+      }
+    },
 
-		removeChild(parentInstance, child) {
-			parentInstance.removeChild(child)
-		},
+    removeChild(parentInstance, child) {
+      // No API for removing child nodes in docx env.
+    },
 
-		removeChildFromContainer(parentInstance, child) {
-			parentInstance.removeChild(child)
-		},
+    removeChildFromContainer(parentInstance, child) {
+      // No API for removing child nodes in docx env.
+    },
 
-		insertBefore(parentInstance, child, beforeChild) {
-			// noob
-		},
+    insertBefore(parentInstance, child, beforeChild) {
+      // noob
+    },
 
-		commitUpdate(instance, updatePayload, type, oldProps, newProps) {
-			// noop
-		},
+    commitUpdate(instance, updatePayload, type, oldProps, newProps) {
+      // noop
+    },
 
-		commitMount(instance, updatePayload, type, oldProps, newProps) {
-			// noop
-		},
+    commitMount(instance, updatePayload, type, oldProps, newProps) {
+      // noop
+    },
 
-		commitTextUpdate(textInstance, oldText, newText) {
-			textInstance.children = newText
-		},
-	},
-})
+    commitTextUpdate(textInstance, oldText, newText) {
+      textInstance.children = newText;
+    }
+  }
+});
 ```
 
 Let's break down our host config -
@@ -149,35 +149,35 @@ A fiber is work on a component that needs to be done or was done. Atmost, a comp
 
 `internalInstanceHandle` contains information about the `tag`, `type`, `key`, `stateNode`, and the return fiber. This object (fiber) further contains information about -
 
-- **`tag`** - Type of fiber.
-- **`key`** - Unique identifier of the child.
-- **`type`** - function/class/module associated with this fiber.
-- **`stateNode`** - The local state associated with this fiber.
+* **`tag`** - Type of fiber.
+* **`key`** - Unique identifier of the child.
+* **`type`** - function/class/module associated with this fiber.
+* **`stateNode`** - The local state associated with this fiber.
 
-- **`return`** - The fiber to return to after finishing processing this one (parent fiber).
-- **`child`** - `child`, `sibling` and `index` represents the **singly linked list data structure**.
-- **`sibling`**
-- **`index`**
-- **`ref`** - The ref last used to attach this (parent) node.
+* **`return`** - The fiber to return to after finishing processing this one (parent fiber).
+* **`child`** - `child`, `sibling` and `index` represents the **singly linked list data structure**.
+* **`sibling`**
+* **`index`**
+* **`ref`** - The ref last used to attach this (parent) node.
 
-- **`pendingProps`** - This property is useful when a tag is overloaded.
-- **`memoizedProps`** - The props used to create the output.
-- **`updateQueue`** - A queue of state updates and callbacks.
-- **`memoizedState`** - The state used to create the output.
+* **`pendingProps`** - This property is useful when a tag is overloaded.
+* **`memoizedProps`** - The props used to create the output.
+* **`updateQueue`** - A queue of state updates and callbacks.
+* **`memoizedState`** - The state used to create the output.
 
-- **`internalContextTag`** - Bit field data structure. React Fiber uses bit field data structures to hold a sequence of information about the fiber and it's subtree which is stored in an adjacent computer memory locations. A bit within this set is used to determine the state of an attribute. Collection of bit fields called flags represent the outcome of an operation or some intermediate state. React Fiber uses AsyncUpdates flag which indicates whether the subtree is async is or not.
-- **`effectTag`** - Effect
-- **`nextEffect`** - Singly linked list fast path to the next fiber with side-effects.
-- **`firstEffect`** - The first(firstEffect) and last(lastEffect) fiber with side-effect within the subtree. Reuse the work done in this fiber.
+* **`internalContextTag`** - Bit field data structure. React Fiber uses bit field data structures to hold a sequence of information about the fiber and it's subtree which is stored in an adjacent computer memory locations. A bit within this set is used to determine the state of an attribute. Collection of bit fields called flags represent the outcome of an operation or some intermediate state. React Fiber uses AsyncUpdates flag which indicates whether the subtree is async is or not.
+* **`effectTag`** - Effect
+* **`nextEffect`** - Singly linked list fast path to the next fiber with side-effects.
+* **`firstEffect`** - The first(firstEffect) and last(lastEffect) fiber with side-effect within the subtree. Reuse the work done in this fiber.
 
-- **`expirationTime`** - This represents a time in the future by which the work should be completed.
-- **`alternate`** - Pooled version of fiber which contains information about the fiber and is ready to be used rather than allocated on use. In computer graphics, this concept is abstracted in **double buffer** pattern. It uses more memory but we can clean up the pairs.
+* **`expirationTime`** - This represents a time in the future by which the work should be completed.
+* **`alternate`** - Pooled version of fiber which contains information about the fiber and is ready to be used rather than allocated on use. In computer graphics, this concept is abstracted in **double buffer** pattern. It uses more memory but we can clean up the pairs.
 
-- `pendingWorkPriority`
-- `progressedPriority`
-- `progressedChild`
-- `progressedFirstDeletion`
-- `progressedLastDeletion`
+* `pendingWorkPriority`
+* `progressedPriority`
+* `progressedChild`
+* `progressedFirstDeletion`
+* `progressedLastDeletion`
 
 **`appendInitialChild`**
 
@@ -188,7 +188,7 @@ and make a call to the render method of our component.
 Example -
 
 ```js
-const data = document.render() // returns the output
+const data = document.render(); // returns the output
 ```
 
 **`prepareUpdate`**
@@ -241,9 +241,9 @@ Creates an instance of a text node.
 
 ### Note
 
-- You should **NOT** rely on Fiber data structure itself. Consider its fields private.
-- Treat 'internalInstanceHandle' as an opaque object itself.
-- Use host context methods for getting data from roots.
+* You should **NOT** rely on Fiber data structure itself. Consider its fields private.
+* Treat 'internalInstanceHandle' as an opaque object itself.
+* Use host context methods for getting data from roots.
 
 > The above points were added to the tutorial after a discussion with [Dan Abramov](https://twitter.com/dan_abramov) regarding the host config methods and Fiber properties.
 
@@ -278,15 +278,15 @@ react-devtools
 ```
 
 ```js
-const Reconciler = require('react-reconciler')
+const Reconciler = require('react-reconciler');
 
 let hostConfig = {
-	// See the above notes for adding methods here
-}
+  // See the above notes for adding methods here
+};
 
-const CustomRenderer = Reconciler(hostConfig)
+const CustomRenderer = Reconciler(hostConfig);
 
-module.exports = CustomRenderer
+module.exports = CustomRenderer;
 ```
 
 Then in your `render` method,

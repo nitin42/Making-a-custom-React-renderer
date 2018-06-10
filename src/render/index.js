@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import {createElement} from '../utils/createElement';
+import { createElement } from '../utils/createElement';
 import WordRenderer from '../reconciler/';
 import parse from '../parse/';
 
@@ -11,7 +11,7 @@ async function render(element, filePath) {
 
   // Returns the current fiber (flushed fiber)
   const node = WordRenderer.createContainer(container);
-    
+
   // Schedules a top level update with current fiber and a priority level (depending upon the context)
   WordRenderer.updateContainer(element, node, null);
 
@@ -44,7 +44,7 @@ function Events(filePath, resolve, reject) {
     error: () => {
       console.log('An error occurred while generating the document.');
       reject();
-    },
+    }
   };
 }
 
