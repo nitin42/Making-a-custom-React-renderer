@@ -99,8 +99,8 @@ const WordRenderer = Reconciler({
 
 		commitTextUpdate(textInstance, oldText, newText) {
 			textInstance.children = newText
-		}
-	}
+		},
+	},
 })
 
 export default WordRenderer
