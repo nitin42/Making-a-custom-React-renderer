@@ -1,5 +1,4 @@
 import { noop } from '../utils/noop';
-import { appendChild } from '../utils/appendChild';
 
 class Text {
   constructor(root, props) {
@@ -10,7 +9,7 @@ class Text {
   }
 
   appendChild(child) {
-    appendChild.call(this, child);
+    this.adder.addText(child);
   }
 
   render() {

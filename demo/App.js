@@ -11,6 +11,11 @@ class App extends Component {
           Congrats! You've successfully completed the tutorial. I'm excited to
           see what you build
         </Text>
+        <Text>Hell yeah! The new renderer api is working.</Text>
+        <Text>
+          Congrats! You've successfully completed the tutorial. I'm excited to
+          see what you build
+        </Text>
       </Document>
     );
   }
