@@ -93,7 +93,7 @@ This method removes a child node. Again we used this in our reconciler.
 
 **`render`**
 
-As we already have appended the child node using `appendChild`, so it's safe to return noop. However, this may vary in your host environment where you might want to render something initially.
+As we have already appended the child node using `appendChild`, `officegen` ensures that the child (text) is added to its main instance, so we can safely return noop in render. However, this may vary in your host environment where after appending the child node using platform specific API, you also might want to render something.
 
 Let's create the `Text` component
 
@@ -161,6 +161,61 @@ In `appendChild`, we also check whether the `child` is a component or not. If it
   <Text>Hello</Text>
 </Document>
 ```
+
+#### Note
+
+* Do not track the children inside an array in your class component API. Instead, directly append them using specific host API, as React provides all the valuable information about the child (which was removed or added)
+
+This is correct
+
+```js
+
+class MyComponent {
+  constructor(rootInstance, props) {
+    this.props = props
+    this.root = rootInstance
+  }
+  
+  appendChild(child) {
+    some_platform_api.add(child)
+    // In browser, you may use something like: document.appendChild(child)
+  }
+  
+  render() {
+    // do something or return noop if root instance already contains the child node (this vary in different host environment)
+  }
+}
+
+```
+
+This is incorrect
+
+```js
+class MyComponent {
+  children = []
+  
+  constructor(rootInstance, props) {
+    this.props = props
+    this.root = rootInstance
+  }
+  
+  appendChild(child) {
+    this.children.push(child)
+  }
+  
+  renderChildren() {
+    for(let i = 0; i < this.children.length; i++) {
+      // do something with this.children[i]
+    }
+  }
+  
+  render() {
+    this.renderChildren()
+  }
+}
+```
+
+* If you're rendering target does not provide a mutate method like `appendChild` and instead only lets you replace the whole "scene" at once, you might want to use the "persistent" renderer mode instead. Here's an [example host config for persistent renderer](https://github.com/facebook/react/blob/master/packages/react-native-renderer/src/ReactFabricHostConfig.js).
 
 ## createElement
 
