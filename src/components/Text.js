@@ -1,21 +1,19 @@
-import { noop } from '../utils/noop';
-
 class Text {
-  constructor(root, props) {
-    this.root = root;
-    this.props = props;
+	constructor(root, props) {
+		this.root = root
+		this.props = props
 
-    this.adder = this.root.doc.createP();
-  }
+		this.adder = this.root.doc.createP()
+	}
 
-  appendChild(child) {
-    this.adder.addText(child);
-  }
-
-  render() {
-    // We already have appended the child node using `addText` in appendChild, so it's safe to return noop
-    noop();
-  }
+	appendChild(child) {
+		// Platform specific API for appending child nodes
+		// Note: This will vary in different host environments. For example - In browser, you might use document.appendChild(child)
+		if (typeof child === 'string') {
+			// Add the string and render the text node
+			this.adder.addText(child)
+		}
+	}
 }
 
-export default Text;
+export default Text
