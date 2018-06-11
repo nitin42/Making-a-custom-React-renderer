@@ -1,9 +1,9 @@
 class Text {
 	constructor(root, props) {
-		this.root = root
-		this.props = props
+		this.root = root;
+		this.props = props;
 
-		this.adder = this.root.doc.createP()
+		this.adder = this.root.doc.createP();
 	}
 
 	appendChild(child) {
@@ -11,9 +11,9 @@ class Text {
 		// Note: This will vary in different host environments. For example - In browser, you might use document.appendChild(child)
 		if (typeof child === 'string') {
 			// Add the string and render the text node
-			this.adder.addText(child)
+			this.adder.addText(child);
 		}
 	}
 }
 
-export default Text
+export default Text;

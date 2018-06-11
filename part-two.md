@@ -35,28 +35,29 @@ Now let's create our `Document` component.
 **`Document.js`**
 
 ```js
-import { noop } from '../utils/noop'
-import { appendChild } from '../utils/appendChild'
+import { appendChild } from '../utils/appendChild';
 
 class Document {
 	constructor(root, props) {
-		this.root = root
-		this.props = props
+		this.root = root;
+		this.props = props;
 
 		// docx instance for adding text nodes (Note - This text nodes are different when compared to DOM)
-		this.adder = this.root.doc.createP()
+		this.adder = this.root.doc.createP();
 	}
 
 	appendChild(child) {
-		appendChild.call(this, child)
-	}
-
-	render() {
-		noop()
+		// Platform specific API for appending child nodes
+		// Note: This will vary in different host environments. For example - In browser, you might use document.appendChild(child)
+		if (typeof child === 'string') {
+			// Add the string and render the text node
+			this.adder.addText(child);
+		}
 	}
 }
 
-export default Document
+export default Document;
+
 ```
 
 Let's see what's going on here!
@@ -79,11 +80,11 @@ parent instance has a method called `appendChild` or not !?
 
 ```js
 appendInitialChild(parentInstance, child) {
-  if (parentInstance.appendChild) {
-    parentInstance.appendChild(child);
-  } else {
-    parentInstance.document = child;
-  }
+	if (parentInstance.appendChild) {
+		parentInstance.appendChild(child);
+	} else {
+		parentInstance.document = child;
+	}
 }
 ```
 
@@ -91,66 +92,34 @@ appendInitialChild(parentInstance, child) {
 
 This method removes a child node. Again we used this in our reconciler.
 
-**`render`**
-
-As we have already appended the child node using `appendChild`, `officegen` ensures that the child (text) is added to its main instance, so we can safely return noop in render. However, this may vary in your host environment where after appending the child node using platform specific API, you also might want to render something.
-
 Let's create the `Text` component
 
 `Text.js`
 
 ```js
-import { noop } from '../utils/noop'
-
 class Text {
 	constructor(root, props) {
-		this.root = root
-		this.props = props
+		this.root = root;
+		this.props = props;
 
-		this.adder = this.root.doc.createP()
+		this.adder = this.root.doc.createP();
 	}
 
 	appendChild(child) {
-		this.adder.addText(child)
-	}
-
-	render() {
-		// We already have appended the child node using `addText` in appendChild, so it's safe to return noop
-		noop()
-	}
-}
-
-export default Text
-```
-
-Implementation for `Text` is similar to the `Document` component except we just render the text string using `addText`.
-
-For this tutorial, the scope is kept limited for both the components, `Document` and `Text`. In a more practical example, you might want to validate the nesting of components too.
-
-```js
-// noop.js
-
-export const noop = () => {}
-```
-
-```js
-// appendChild.js
-
-// Platform specific API for appending child nodes in docx environment.
-// Note: This will vary in different host environments. For example - In browser, you will use document.appendChild(child)
-
-export function appendChild(child) {
-	if (typeof child === 'string') {
-		// Add the string and render the text node
-		this.adder.addText(child)
-	} else if (typeof child === 'object') {
-		// It's a component
-		child.render()
+		// Platform specific API for appending child nodes
+		// Note: This will vary in different host environments. For example - In browser, you might use document.appendChild(child)
+		if (typeof child === 'string') {
+			// Add the string and render the text node
+			this.adder.addText(child);
+		}
 	}
 }
+
+export default Text;
+
 ```
 
-In `appendChild`, we also check whether the `child` is a component or not. If it's a component, then we simply call its render method. This covers both the cases,
+Implementation for `Text` is similar to the `Document` component but there is a subtle difference. `appendChild` method in `Document` component also appends the child of type string similar to `Text` component but if the child is an object it is skipped, since we don't have a mutative API in our host target for managing an object type child. But interesting thing is, React takes care of this. If a child is an object for example - A Text component, then React ensures that `appendChild` method of that component is called in a right order, so that we have content to render.
 
 ```js
 <Document>Hello</Document>
@@ -162,60 +131,57 @@ In `appendChild`, we also check whether the `child` is a component or not. If it
 </Document>
 ```
 
+> For this tutorial, the scope is kept limited for both the components, `Document` and `Text`. In a more practical example, you might want to validate the nesting of components too.
+
+
 #### Note
 
-* Do not track the children inside an array in your class component API. Instead, directly append them using specific host API, as React provides all the valuable information about the child (which was removed or added)
+- Do not track the children inside an array in your class component API. Instead, directly append them using specific host API, as React provides all the valuable information about the child (which was removed or added)
 
 This is correct
 
 ```js
-
 class MyComponent {
-  constructor(rootInstance, props) {
-    this.props = props
-    this.root = rootInstance
-  }
-  
-  appendChild(child) {
-    some_platform_api.add(child)
-    // In browser, you may use something like: document.appendChild(child)
-  }
-  
-  render() {
-    // do something or return noop if root instance already contains the child node (this vary in different host environment)
-  }
-}
+	constructor(rootInstance, props) {
+		this.props = props
+		this.root = rootInstance
+	}
 
+	appendChild(child) {
+		some_platform_api.add(child)
+		// In browser, you may use something like: document.appendChild(child)
+	}
+}
 ```
 
 This is incorrect
 
 ```js
 class MyComponent {
-  children = []
-  
-  constructor(rootInstance, props) {
-    this.props = props
-    this.root = rootInstance
-  }
-  
-  appendChild(child) {
-    this.children.push(child)
-  }
-  
-  renderChildren() {
-    for(let i = 0; i < this.children.length; i++) {
-      // do something with this.children[i]
-    }
-  }
-  
-  render() {
-    this.renderChildren()
-  }
+	children = []
+
+	constructor(rootInstance, props) {
+		this.props = props
+		this.root = rootInstance
+	}
+
+	appendChild(child) {
+		this.children.push(child)
+	}
+
+	renderChildren() {
+		for (let i = 0; i < this.children.length; i++) {
+			// do something with this.children[i]
+		}
+	}
+
+	render() {
+		this.renderChildren()
+	}
 }
 ```
 
-* If you're rendering target does not provide a mutate method like `appendChild` and instead only lets you replace the whole "scene" at once, you might want to use the "persistent" renderer mode instead. Here's an [example host config for persistent renderer](https://github.com/facebook/react/blob/master/packages/react-native-renderer/src/ReactFabricHostConfig.js).
+- If you're rendering target does not provide a mutate method like `appendChild` and instead only lets you replace the whole "scene" at once, you might want to use the "persistent" renderer mode instead. Here's an [example host config for persistent renderer](https://github.com/facebook/react/blob/master/packages/react-native-renderer/src/ReactFabricHostConfig.js).
 
 ## createElement
 

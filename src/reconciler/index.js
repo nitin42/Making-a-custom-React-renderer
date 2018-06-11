@@ -1,31 +1,31 @@
-import emptyObject from 'fbjs/lib/emptyObject'
-import { createElement, getHostContextNode } from '../utils/createElement'
+import emptyObject from 'fbjs/lib/emptyObject';
+import { createElement, getHostContextNode } from '../utils/createElement';
 
-const Reconciler = require('react-reconciler')
+const Reconciler = require('react-reconciler');
 
 const WordRenderer = Reconciler({
 	appendInitialChild(parentInstance, child) {
 		if (parentInstance.appendChild) {
-			parentInstance.appendChild(child)
+			parentInstance.appendChild(child);
 		} else {
-			parentInstance.document = child
+			parentInstance.document = child;
 		}
 	},
 
 	createInstance(type, props, internalInstanceHandle) {
-		return createElement(type, props)
+		return createElement(type, props);
 	},
 
 	createTextInstance(text, rootContainerInstance, internalInstanceHandle) {
-		return text
+		return text;
 	},
 
 	finalizeInitialChildren(wordElement, type, props) {
-		return false
+		return false;
 	},
 
 	getPublicInstance(inst) {
-		return inst
+		return inst;
 	},
 
 	prepareForCommit() {
@@ -33,7 +33,7 @@ const WordRenderer = Reconciler({
 	},
 
 	prepareUpdate(wordElement, type, oldProps, newProps) {
-		return true
+		return true;
 	},
 
 	resetAfterCommit() {
@@ -45,15 +45,15 @@ const WordRenderer = Reconciler({
 	},
 
 	getRootHostContext(instance) {
-		return getHostContextNode(instance)
+		return getHostContextNode(instance);
 	},
 
 	getChildHostContext(instance) {
-		return emptyObject
+		return emptyObject;
 	},
 
 	shouldSetTextContent(type, props) {
-		return false
+		return false;
 	},
 
 	now: () => {},
@@ -63,17 +63,17 @@ const WordRenderer = Reconciler({
 	mutation: {
 		appendChild(parentInstance, child) {
 			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child)
+				parentInstance.appendChild(child);
 			} else {
-				parentInstance.document = child
+				parentInstance.document = child;
 			}
 		},
 
 		appendChildToContainer(parentInstance, child) {
 			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child)
+				parentInstance.appendChild(child);
 			} else {
-				parentInstance.document = child
+				parentInstance.document = child;
 			}
 		},
 
@@ -98,9 +98,9 @@ const WordRenderer = Reconciler({
 		},
 
 		commitTextUpdate(textInstance, oldText, newText) {
-			textInstance.children = newText
-		},
-	},
-})
+			textInstance.children = newText;
+		}
+	}
+});
 
-export default WordRenderer
+export default WordRenderer;
