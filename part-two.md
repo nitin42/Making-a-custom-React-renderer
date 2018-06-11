@@ -7,8 +7,7 @@ of `createElement` method.
 
 ## Components
 
-For our example, we'll only implement two components, `Document` and `Text`. A `Document` component is a wrapper or say parent
-component (like `div`) and `Text` component is the main component for adding the text to our document.
+For our example, we'll only implement one component `Text`. A `Text` component is the main component for adding the text to our document.
 
 > Text component, however, doesn't create specific text node. It works differently when compared to the DOM APIs.
 
@@ -30,19 +29,16 @@ class WordDocument {
 export default WordDocument
 ```
 
-Now let's create our `Document` component.
+Now let's create our `Text` component.
 
-**`Document.js`**
+**`Text.js`**
 
 ```js
-import { appendChild } from '../utils/appendChild';
-
-class Document {
+class Text {
 	constructor(root, props) {
 		this.root = root;
 		this.props = props;
 
-		// docx instance for adding text nodes (Note - This text nodes are different when compared to DOM)
 		this.adder = this.root.doc.createP();
 	}
 
@@ -56,7 +52,7 @@ class Document {
 	}
 }
 
-export default Document;
+export default Text;
 
 ```
 
@@ -88,51 +84,9 @@ appendInitialChild(parentInstance, child) {
 }
 ```
 
-**`removeChild`**
+Along with `appendChild` method, you can also add `removeChild` method to remove child nodes. Since our host target does not provide a mutative API for removing child nodes, we are not using this method.
 
-This method removes a child node. Again we used this in our reconciler.
-
-Let's create the `Text` component
-
-`Text.js`
-
-```js
-class Text {
-	constructor(root, props) {
-		this.root = root;
-		this.props = props;
-
-		this.adder = this.root.doc.createP();
-	}
-
-	appendChild(child) {
-		// Platform specific API for appending child nodes
-		// Note: This will vary in different host environments. For example - In browser, you might use document.appendChild(child)
-		if (typeof child === 'string') {
-			// Add the string and render the text node
-			this.adder.addText(child);
-		}
-	}
-}
-
-export default Text;
-
-```
-
-Implementation for `Text` is similar to the `Document` component but there is a subtle difference. `appendChild` method in `Document` component also appends the child of type string similar to `Text` component but if the child is an object it is skipped, since we don't have a mutative API in our host target for managing an object type child. But interesting thing is, React takes care of this. If a child is an object for example - A Text component, then React ensures that `appendChild` method of that component is called in a right order, so that we have content to render.
-
-```js
-<Document>Hello</Document>
-```
-
-```js
-<Document>
-	<Text>Hello</Text>
-</Document>
-```
-
-> For this tutorial, the scope is kept limited for both the components, `Document` and `Text`. In a more practical example, you might want to validate the nesting of components too.
-
+> For this tutorial, the scope is kept limited for `Text` component. In a more practical example, you might want to validate the nesting of components too.
 
 #### Note
 
@@ -190,7 +144,7 @@ This is similar to the `React.createElement()` for DOM as a target.
 **`createElement.js`**
 
 ```js
-import { Document, Text, WordDocument } from '../components/index'
+import { Text, WordDocument } from '../components/index'
 
 /**
  * Creates an element for a document
@@ -202,7 +156,6 @@ function createElement(type, props, root) {
 	const COMPONENTS = {
 		ROOT: () => new WordDocument(),
 		TEXT: () => new Text(root, props),
-		DOCUMENT: () => new Document(root, props),
 		default: undefined
 	}
 
@@ -216,6 +169,6 @@ I think you can easily understand what's happening inside the `createElement` me
 
 Depending upon the type of element, we return an instance based on it else we return `undefined`.
 
-We're done with the part two of our tutorial. We created the API for our two components (`Document` and `Text`) and a `createElement` method to create an element. Now we will create a function that will parse the input component (input to `render` method) and will return the output (rendered children and props).
+We're done with the part two of our tutorial. We created am API for `Text` component and a `createElement` method to create an element. Now we will create a function that will parse the input component (input to `render` method) and will return the output (rendered children and props).
 
 [Continue to Part-III](./part-three.md)
