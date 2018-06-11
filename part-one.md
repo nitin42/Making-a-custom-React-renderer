@@ -83,7 +83,7 @@ const WordRenderer = Reconciler({
     return false;
   },
 
-  now: () => performance.now(),
+  now: () => {}
 
   supportsMutation: false
 });
