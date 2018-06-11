@@ -10,15 +10,13 @@
 
 ## Introduction
 
-This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into four parts -
+This is a small tutorial on how to build your custom React renderer and render the components to the host environment you need. The tutorial is divided into three parts -
 
 * **Part 1** - Creating a React reconciler (using [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) package).
 
 * **Part 2** - Creating a public interface to the reconciler i.e "Renderer".
 
-* **Part 3** - Parsing the input component (call the render() method on our main document).
-
-* **Part 4** - Creating a render method to flush everything to the host environment we need.
+* **Part 3** - Creating a render method to flush everything to the host environment we need.
 
 ## Brief
 
@@ -32,12 +30,7 @@ In part two, we will create a public interface to the reconciler i.e a renderer.
 
 ### [Part-III](./part-three.md)
 
-In part three, we will build a function that will parse the input component and will return the output (rendered children and props).
-
-### [Part-IV](./part-four.md)
-
-In part four, we will create a render method which will render our input component.
-
+In part three, we will create a render method which will render our input component.
 
 ## What we will build?
 

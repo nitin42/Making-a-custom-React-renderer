@@ -216,6 +216,6 @@ I think you can easily understand what's happening inside the `createElement` me
 
 Depending upon the type of element, we return an instance based on it else we return `undefined`.
 
-We're done with the part two of our tutorial. We created the API for our two components (`Document` and `Text`) and a `createElement` method to create an element. Now we will create a function that will parse the input component (input to `render` method) and will return the output (rendered children and props).
+We're done with the part two of our tutorial. We created the API for our two components (`Document` and `Text`) and a `createElement` method to create an element. In the next part, we will create a render method to flush everything to the host environment.
 
 [Continue to Part-III](./part-three.md)

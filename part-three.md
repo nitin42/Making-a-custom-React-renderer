@@ -1,70 +1,78 @@
-# Part-III
+# Part-IV
 
-In the [last section](./part-two.md), we created a `createElement` method and also designed the component API for our example. In this part, we will
-create a function for parsing the input component (input to the `render` method) and return the output.
+This is the last section of our tutorial. We've done all the heavy work, created a React reconciler, created a public interface to
+our reconciler, designed the component API and also created a function to parse the input component.
 
-## Parse
+Now we just need to create a `render` method to flush everything to the host environment.
+
+## render
 
 ```js
-/**
- * Parse the input component by calling the render() method (passed to docx generator instance)
- * @param {Object} input Input component
- */
-const parse = (input) => {
-  function parseComponent(inputComponent) {
-    const document = inputComponent.document;
 
-    document.render(); // Flush everything
+import fs from 'fs';
+import { createElement } from '../utils/createElement';
+import { WordRenderer } from './renderer';
+import parse from './parse';
 
-    return inputComponent;
-  }
+// renders the component
+async function render(element, filePath) {
+  const container = createElement('ROOT');
 
-  function toBuffer() {
-    return parseComponent(input);
-  }
+  const node = WordRenderer.createContainer(container);
 
+  WordRenderer.updateContainer(element, node, null);
+
+  const output = parse(container).toBuffer();
+
+  const stream = fs.createWriteStream(filePath);
+
+  await new Promise((resolve, reject) => {
+    output.doc.generate(stream, Events(filePath, resolve, reject));
+  });
+}
+
+function Events(filePath, resolve, reject) {
   return {
-    toBuffer,
+    finalize: () => {
+      console.log(`✨  Word document created at ${path.resolve(filePath)}.`);
+      resolve();
+    },
+    error: () => {
+      console.log('An error occurred while generating the document.');
+      reject();
+    },
   };
-};
+}
 
-export default parse;
+export default render;
+
 ```
 
 Let's see what's going on here!
 
-**`parseComponent`**
+**`container`**
 
-```js
-function parseComponent(inputComponent) {
-  const document = inputComponent.document;
+This is the root instance (remember `rootContainerInstance` in our reconciler ?).
 
-  document.render();
+**`WordRenderer.createContainer`**
 
-  return inputComponent;
-}
-```
+This function takes a `root` container and returns the current fiber (flushed fiber). Remember a fiber is a JavaScript object
+that contains information about a component, it's input and output.
 
-In the above function, we create a variable `document` that represents a parentInstance or a component we want to render.
-This property is accessible only because of -
+**`WordRenderer.updateContainer`**
 
-```js
-appendInitialChild(parentInstance, child) {
-  // if (parentInstance.appendChild) {
-    // parentInstance.appendChild(child);
-  // }
-  else {
-    parentInstance.document = child; 👈
-  }
-}
-```
+This function takes an element, a root container, a parent component, a callback function and schedules a top level update.
+This is done by scheduling an update with the current fiber and a priority level (depends on the context)
 
-**`document.render()`**
+Finally we parse our input component to render all the children and props and generate the word document by creating a write stream.
 
-Here we are calling the render method of the input component. This will append all the children to `children` array. Thus, we can flush this output to the host environment.
+Still having some doubts? Check out the [FAQs](./faq.md).
 
-Finally we return our input component and use `toBuffer` method to return the output.
+Congrats! You've have successfully completed the tutorial. Full source code for the tutorial is already available in this repository ([src](./src)). If you want to read the whole source code then follow this order -
 
-Yeah! We're done with this part and now we just need a `render` method to flush everything to the host environment we need.
+[`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement) => [`parse the input component`](./src/parse/index.js) => [`render method`](./src/render/index.js)
 
-[Continue to Part-IV](./part-four.md)
+If you've enjoyed reading the tutorial then watch/star this repo and follow me on [Twitter](http://twitter.com/NTulswani) for updates.
+
+Thanks for reading the tutorial!
+
