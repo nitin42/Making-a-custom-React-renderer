@@ -85,47 +85,7 @@ const WordRenderer = Reconciler({
 
   now: () => performance.now(),
 
-  mutation: {
-    appendChild(parentInstance, child) {
-      if (parentInstance.appendChild) {
-        parentInstance.appendChild(child);
-      } else {
-        parentInstance.document = child;
-      }
-    },
-
-    appendChildToContainer(parentInstance, child) {
-      if (parentInstance.appendChild) {
-        parentInstance.appendChild(child);
-      } else {
-        parentInstance.document = child;
-      }
-    },
-
-    removeChild(parentInstance, child) {
-      // No API for removing child nodes in docx env.
-    },
-
-    removeChildFromContainer(parentInstance, child) {
-      // No API for removing child nodes in docx env.
-    },
-
-    insertBefore(parentInstance, child, beforeChild) {
-      // noob
-    },
-
-    commitUpdate(instance, updatePayload, type, oldProps, newProps) {
-      // noop
-    },
-
-    commitMount(instance, updatePayload, type, oldProps, newProps) {
-      // noop
-    },
-
-    commitTextUpdate(textInstance, oldText, newText) {
-      textInstance.children = newText;
-    }
-  }
+  supportsMutation: false
 });
 ```
 
@@ -238,6 +198,9 @@ It is used to mark the current host context (root instance) which is sent to upd
 
 **`createTextInstance`**
 Creates an instance of a text node.
+
+**`supportsMutation`**
+`True` for **mutating renderers** where the host target has mutative api like `appendChild` in DOM.
 
 ### Note
 

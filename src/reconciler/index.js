@@ -7,8 +7,6 @@ const WordRenderer = Reconciler({
 	appendInitialChild(parentInstance, child) {
 		if (parentInstance.appendChild) {
 			parentInstance.appendChild(child);
-		} else {
-			parentInstance.document = child;
 		}
 	},
 
@@ -60,47 +58,7 @@ const WordRenderer = Reconciler({
 
 	useSyncScheduling: true,
 
-	mutation: {
-		appendChild(parentInstance, child) {
-			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child);
-			} else {
-				parentInstance.document = child;
-			}
-		},
-
-		appendChildToContainer(parentInstance, child) {
-			if (parentInstance.appendChild) {
-				parentInstance.appendChild(child);
-			} else {
-				parentInstance.document = child;
-			}
-		},
-
-		removeChild(parentInstance, child) {
-			// No API for removing child nodes in docx env.
-		},
-
-		removeChildFromContainer(parentInstance, child) {
-			// No API for removing child nodes in docx env.
-		},
-
-		insertBefore(parentInstance, child, beforeChild) {
-			// noob
-		},
-
-		commitUpdate(instance, updatePayload, type, oldProps, newProps) {
-			// noop
-		},
-
-		commitMount(instance, updatePayload, type, oldProps, newProps) {
-			// noop
-		},
-
-		commitTextUpdate(textInstance, oldText, newText) {
-			textInstance.children = newText;
-		}
-	}
+	supportsMutation: false,
 });
 
 export default WordRenderer;
