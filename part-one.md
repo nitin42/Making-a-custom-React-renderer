@@ -12,7 +12,7 @@ Let's get started!
 We will first install the dependencies.
 
 ```
-npm install react-reconciler@0.7.0 fbjs@0.8.16
+npm install react-reconciler fbjs
 ```
 
 Let's import the `Reconciler` from `react-reconciler` and also the other modules.
