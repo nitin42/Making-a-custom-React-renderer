@@ -1,7 +1,7 @@
-# Part-IV
+# Part-III
 
 This is the last section of our tutorial. We've done all the heavy work, created a React reconciler, created a public interface to
-our reconciler, designed the component API and also created a function to parse the input component.
+our reconciler, designed the component API.
 
 Now we just need to create a `render` method to flush everything to the host environment.
 
@@ -12,7 +12,6 @@ Now we just need to create a `render` method to flush everything to the host env
 import fs from 'fs';
 import { createElement } from '../utils/createElement';
 import { WordRenderer } from './renderer';
-import parse from './parse';
 
 // renders the component
 async function render(element, filePath) {
@@ -22,12 +21,10 @@ async function render(element, filePath) {
 
   WordRenderer.updateContainer(element, node, null);
 
-  const output = parse(container).toBuffer();
-
   const stream = fs.createWriteStream(filePath);
 
   await new Promise((resolve, reject) => {
-    output.doc.generate(stream, Events(filePath, resolve, reject));
+    container.doc.generate(stream, Events(filePath, resolve, reject));
   });
 }
 
@@ -64,13 +61,13 @@ that contains information about a component, it's input and output.
 This function takes an element, a root container, a parent component, a callback function and schedules a top level update.
 This is done by scheduling an update with the current fiber and a priority level (depends on the context)
 
-Finally we parse our input component to render all the children and props and generate the word document by creating a write stream.
+Finally, we render all the children and generate the word document by creating a write stream.
 
 Still having some doubts? Check out the [FAQs](./faq.md).
 
 Congrats! You've have successfully completed the tutorial. Full source code for the tutorial is already available in this repository ([src](./src)). If you want to read the whole source code then follow this order -
 
-[`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement) => [`parse the input component`](./src/parse/index.js) => [`render method`](./src/render/index.js)
+[`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement) => [`render method`](./src/render/index.js)
 
 If you've enjoyed reading the tutorial then watch/star this repo and follow me on [Twitter](http://twitter.com/NTulswani) for updates.
 

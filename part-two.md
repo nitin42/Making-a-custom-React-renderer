@@ -9,7 +9,7 @@ of `createElement` method.
 
 For our example, we'll only implement one component `Text`. A `Text` component is the main component for adding the text to our document.
 
-> Text component, however, doesn't create specific text node. It works differently when compared to the DOM APIs.
+> Text component, however, doesn't create specific text node. It has different semantics when compared to the DOM APIs.
 
 We will first create a root container (remember `rootContainerInstance` in our reconciler ?) for our components. This is responsible
 for creating a document instance for [officegen](https://github.com/Ziv-Barber/officegen).
