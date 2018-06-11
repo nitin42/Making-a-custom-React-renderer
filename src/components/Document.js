@@ -1,5 +1,3 @@
-import { appendChild } from '../utils/appendChild';
-
 class Document {
 	constructor(root, props) {
 		this.root = root;
