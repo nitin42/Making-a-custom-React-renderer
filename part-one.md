@@ -231,13 +231,13 @@ yarn react-devtools
 or if you use npm,
 
 ```
-npm install -g react-devtools
+npm install --save-dev react-devtools
 ```
 
 then run it with
 
 ```
-react-devtools
+npx react-devtools
 ```
 
 ```js
