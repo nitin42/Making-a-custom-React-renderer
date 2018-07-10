@@ -67,7 +67,7 @@ Still having some doubts? Check out the [FAQs](./faq.md).
 
 Congrats! You've have successfully completed the tutorial. Full source code for the tutorial is already available in this repository ([src](./src)). If you want to read the whole source code then follow this order -
 
-[`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement) => [`render method`](./src/render/index.js)
+[`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement.js) => [`render method`](./src/render/index.js)
 
 If you've enjoyed reading the tutorial then watch/star this repo and follow me on [Twitter](http://twitter.com/NTulswani) for updates.
 
