@@ -1,6 +1,8 @@
-# Building a custom React renderer
+# 创建一个自定义 React 渲染器
 
 [![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
+
+[English](./README.md) | 简体中文
 
 > 让我们创建一个自定义的 React 渲染器 😎
 
@@ -8,29 +10,29 @@
   <img src="https://cdn.filestackcontent.com/5KdzhvGRG61WMQhBa1Ql" width="630" height="350">
 </p>
 
-## Introduction
+## 介绍
 
-这是一个关于如何创建自定义 React 渲染器并将组件渲染到你需要的宿主环境的教程。教程分为三部分 ——
+这是一个关于如何创建一个自定义 React 渲染器并将所有内容渲染到你的目标宿主环境中的教程。教程分为三部分 ——
 
 * **第一部分** - 创建一个 React 调度器（使用 [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) 包）。
 
-* **第二部分** - Creating a public interface to the reconciler i.e "Renderer".
+* **第二部分** - 我们将创建一个用于调度器的公开方法。
 
-* **第三部分** - Creating a render method to flush everything to the host environment we need.
+* **第三部分** - 创建渲染方法来将所有创建的组件实例渲染到我们的目标宿主环境中。
 
-## Brief
+## 概要
 
-### [第一部分](./part-one.md)
+### [第一部分](./part-one-zh_CN.md)
 
 在第一部分，我们将使用 [`react-reconciler`](https://github.com/facebook/react/tree/master/packages/react-reconciler) 创建一个 React 调度器。我们将使用 Fiber 实现渲染器，因为它拥有优秀的用于创建自定义渲染器的 API。
 
-### [第二部分](./part-two.md)
+### [第二部分](./part-two-zh_CN.md)
 
-In part two, we will create a public interface to the reconciler i.e a renderer. We will create a custom method for `createElement` and will also architect the component API for our example.
+在第二部分，我们将创建一个用于调度器的公开方法。我们将创建一个自定义 `createElement` 函数，还将为我们的示例构建组件 API。
 
-### [第三部分](./part-three.md)
+### [第三部分](./part-three-zh_CN.md)
 
-In part three, we will create a render method which will render our input component.
+在第三部分，我们将创建渲染方法，用于渲染我们创建的组件实例。
 
 ## 我们将创建什么？
 
@@ -56,26 +58,26 @@ doc.generate(output);
 
 **事件**
 
-`finalize` - It is fired after a stream has been generated successfully.
+`finalize` - 在流生成成功之后触发。
 
-`error` - Fired when there are any errors
+`error` - 在发生异常时触发。
 
 ## 运行这个项目
 
-```
+```bash
 git clone https://github.com/nitin42/Making-a-custom-React-renderer
 cd Making-a-custom-React-renderer
 yarn install
 yarn example
 ```
 
-After you run `yarn example`, a docx file will be generated in the [demo](./demo) folder.
+运行 `yarn example` 后，会在 [demo](./demo) 文件夹下生成一个 docx 文件。
 
-## Contributing
+## 贡献
 
-Suggestions to improve the tutorial are welcome 😃.
+欢迎提出改进教程的建议😃。
 
-**If you've completed the tutorial successfully, you can either watch/star this repo or follow me on [twitter](https://twitter.com/NTulswani) for more updates.**
+**如果您已成功完成本教程，您可以 watch 或 star 此代码库或在 [twitter](https://twitter.com/NTulswani) 上关注我以获取最新的消息。**
 
 <a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/FCRW65HPiwhNtebDx2tTc53E/nitin42/Making-a-custom-React-renderer'>
   <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/FCRW65HPiwhNtebDx2tTc53E/nitin42/Making-a-custom-React-renderer.svg' />

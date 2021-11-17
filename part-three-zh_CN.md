@@ -1,6 +1,6 @@
 # 第三部分
 
-这是我们教程的最后一部分。我们已经完成了所有繁重的工作，创建了一个 React 调度器，为我们的调度器创建了一个公共接口，设计了组件 API。
+这是我们教程的最后一部分。我们已经完成了所有繁重的工作，创建了一个 React 调度器，为我们的调度器创建了一个公开方法，设计了组件的 API。
 
 现在我们只需要创建一个 `render` 方法来将所有内容渲染到宿主环境中。
 
@@ -48,7 +48,7 @@ export default render;
 
 **`container`**
 
-这是根节点实例（还记得我们调度器中的 `rootContainerInstance` 吗？）。
+这是根元素实例（还记得我们调度器中的 `rootContainerInstance` 吗？）。
 
 **`WordRenderer.createContainer`**
 
@@ -56,17 +56,17 @@ export default render;
 
 **`WordRenderer.updateContainer`**
 
-这个函数接收元素、根容器、父组件、回调函数并执行一次顶层更新。
-这是根据当前 Fiber 和优先级（取决于上下文）调度更新来实现的。
+这个函数接收元素、根容器、父组件、回调函数并触发一次从最顶层开始的更新。
+这是根据当前 Fiber 和优先级（取决于上下文）来调度更新实现的。
 
 最后，我们渲染所有子节点并通过创建写入流来生成 word 文档。
 
 仍有疑惑？查看 [常见问题](./faq.md)。
 
-恭喜！你已成功完成本教程。本教程的完整源代码已在此代码库 ([src](./src)) 中提供。如果你想阅读整个源代码，请按照以下顺序 -
+恭喜！你已成功完成本教程。本教程的完整源代码在此代码库 ([src](./src)) 中提供。如果你想阅读整个源代码，请按照以下顺序 -
 
 [`reconciler`](./src/reconciler/index.js)  => [`components`](./src/components/)  => [`createElement`](./src/utils/createElement.js) => [`render method`](./src/render/index.js)
 
-如果你喜欢阅读本教程，请 watch 或 star 这个代码库，并在 [Twitter](http://twitter.com/NTulswani) 上关注我以获取更新。
+如果你喜欢阅读本教程，请 watch 或 star 这个代码库，并在 [Twitter](http://twitter.com/NTulswani) 上关注我以获取最新的消息。
 
 感谢你阅读本教程！
