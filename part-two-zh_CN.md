@@ -1,9 +1,8 @@
-# Part-II
+# 第二部分
 
 在上一节中，我们构建了一个 React 协调器，并了解了它如何管理渲染器的生命周期。
 
-In part two, we'll create a public interface to the reconciler. We will design our component API and will also build a custom version
-of `createElement` method.
+在第二部分，我们我们将为调度器创建一个公共接口。我们将设计我们组件的 API，然后将创建一个自定义版本的 `createElement` 方法。
 
 ## 组件
 
@@ -42,7 +41,7 @@ class Text {
 	}
 
 	appendChild(child) {
-        // 用于附加子节点的 API
+        // 用于添加子节点的 API
         // 注意：这在不同的宿主环境中会有所不同。例如：在浏览器中，你可以使用 document.appendChild(child)
 		if (typeof child === 'string') {
 			// 添加字符串并渲染文本节点
@@ -63,14 +62,13 @@ export default Text;
 
 例子 -
 
-```
+```js
 this.adder.addText(__someText__)
 ```
 
 **`appendChild`**
 
-This method appends the child nodes using the platform specific function for `docx` i.e `appendChild`. Remember we used this in our reconciler's `appendInitialChild` method to check whether the
-parent instance has a method called `appendChild` or not !?
+此方法使用 `docx` 的特定平台方法（即 `appendChild`）添加子节点。请记住，我们在调度器的 `appendInitialChild` 方法中检查父实例是否存在 `appendChild` 方法！？
 
 ```js
 appendInitialChild(parentInstance, child) {
@@ -82,15 +80,15 @@ appendInitialChild(parentInstance, child) {
 }
 ```
 
-Along with `appendChild` method, you can also add `removeChild` method to remove child nodes. Since our host target does not provide a mutative API for removing child nodes, we are not using this method.
+除了 `appendChild` 方法，你还可以添加 `removeChild` 方法来删​​除子节点。由于我们的宿主目标不提供用于删除子节点的可变 API，因此我们没有使用此方法。
 
-> For this tutorial, the scope is kept limited for `Text` component. In a more practical example, you might want to validate the nesting of components too.
+> 在本教程，`Text` 组件不允许嵌套其它的组件。在更实际的示例中，你可能需要验证组件的嵌套。
 
-#### Note
+#### 注意
 
-- Do not track the children inside an array in your class component API. Instead, directly append them using specific host API, as React provides all the valuable information about the child (which was removed or added)
+- 不要在类组件 API 中使用数组追踪子组件。相反，直接使用特定的宿主 API 添加它们，因为 React 提供了有关子节点（已删除或添加）的所有有价值的信息。
 
-This is correct
+这是正确的
 
 ```js
 class MyComponent {
@@ -101,7 +99,7 @@ class MyComponent {
 
 	appendChild(child) {
 		some_platform_api.add(child)
-		// In browser, you may use something like: document.appendChild(child)
+		// 在浏览器中，我们可能会使用 document.appendChild(child)
 	}
 }
 ```
@@ -123,7 +121,7 @@ class MyComponent {
 
 	renderChildren() {
 		for (let i = 0; i < this.children.length; i++) {
-			// do something with this.children[i]
+			// 对 this.children[i] 进行一些操作
 		}
 	}
 
@@ -133,11 +131,11 @@ class MyComponent {
 }
 ```
 
-- If you're rendering target does not provide a mutate method like `appendChild` and instead only lets you replace the whole "scene" at once, you might want to use the "persistent" renderer mode instead. Here's an [example host config for persistent renderer](https://github.com/facebook/react/blob/master/packages/react-native-renderer/src/ReactFabricHostConfig.js).
+- 如果你的渲染目标没有提供像 `appendChild` 这样的可变方法，而是只允许你一次替换整个“场景”，你可能需要使用“持久（persistent）”渲染器模式来代替。这是一个[持久渲染器的示例宿主配置](https://github.com/facebook/react/blob/master/packages/react-native-renderer/src/ReactFabricHostConfig.js)。
 
 ## createElement
 
-This is similar to the `React.createElement()` for DOM as a target.
+这类似于将 DOM 作为目标的 `React.createElement()`。
 
 **`createElement.js`**
 
@@ -145,10 +143,10 @@ This is similar to the `React.createElement()` for DOM as a target.
 import { Text, WordDocument } from '../components/index'
 
 /**
- * Creates an element for a document
- * @param {string} type Element type
- * @param {Object} props Component props
- * @param {Object} root Root instance
+ * 为文档创建一个元素
+ * @param {string} type 元素类型
+ * @param {Object} props 组件属性
+ * @param {Object} root 根节点实例
  */
 function createElement(type, props, root) {
 	const COMPONENTS = {
@@ -162,11 +160,10 @@ function createElement(type, props, root) {
 
 export { createElement }
 ```
+我认为你可以很容易地理解在 `createElement` 方法中发生了什么。它需要传入元素类型、组件属性和根节点实例。
 
-I think you can easily understand what's happening inside the `createElement` method. It takes an element, props, and the root instance.
+根据元素的类型，我们返回它的实例，否则我们返回 `undefined`。
 
-Depending upon the type of element, we return an instance based on it else we return `undefined`.
+我们完成了教程的第二部分。我们为我们的两个组件（`Document` 和 `Text`）构建了 API，并构建了一个用于创建元素的 `createElement` 方法。在下一部分中，我们将构建一个渲染方法来将所有内容渲染到宿主环境中。
 
-We're done with the part two of our tutorial. We created the API for our two components (`Document` and `Text`) and a `createElement` method to create an element. In the next part, we will create a render method to flush everything to the host environment.
-
-[Continue to Part-III](./part-three.md)
+[继续第三部分](./part-three.md)
