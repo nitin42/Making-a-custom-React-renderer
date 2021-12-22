@@ -278,4 +278,4 @@ function render(element, target, callback) {
 
 [更多渲染器的实际示例](https://github.com/facebook/react/tree/master/packages/react-reconciler#practical-examples)
 
-[继续第二部分]](./part-two-zh_CN.md)
+[继续第二部分](./part-two-zh_CN.md)
