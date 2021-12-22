@@ -2,6 +2,8 @@
 
 [![Build Status](https://travis-ci.org/nitin42/Making-a-custom-React-renderer.svg?branch=master)](https://travis-ci.org/nitin42/Making-a-custom-React-renderer)
 
+English | [简体中文](./README-zh_CN.md)
+
 > Let's make a custom React renderer 😎
 
 <p align="center">
